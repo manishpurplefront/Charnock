@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Charnock</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="by_purplefront">by PurpleFront</string>
+    <string name="customer_feedback_app">School App</string>
+    <string name="nointernetaccess">No Internet Access</string>
+    <string name="nointernetconnection">No Internet Connection</string>
+    <string name="unknownerror">Some thing went wrong contact PurpleFront for the issue.</string>
+    <string name="unknownerror2">Some error occurred try again</string>
+    <string name="unknownerror4">An error occurred while accessing Database try clearing Database and use email you are already registered with</string>
+    <string name="unknownerror3">An Unknown error occurred try again restarting the app</string>
+    <string name="unknownerror5">Some error occurred please try again after some time</string>
+    <string name="unknownerror6">Error contacting server try again after some time</string>
+    <string name="unknownerror7">No response from server</string>
+    <string name="unknownerror8">Error contacting server</string>
+    <string name="unknownerror9">Error accessing server try reloading the page</string>
+    <string name="error_occured">No Internet Access an error has occurred try again</string>
+    <string name="permission_error">You do not have enough permission to send message</string>
+    <string name="permission_error_calender">You do not have enough permission to create event</string>
+    <string name="powered_by_purplefront">Powered by PurpleFront</string>
+    <string name="loading">Loading…</string>
+    <string name="please_wait">Please wait</string>
+    <string name="message">New Message:</string>
+    <string name="sender_id">963510041615</string>
+    <string name="url_reference">http://purplefront.net/charnock/</string>
+    <string name="demo_video"><a href="http://www.purplefront.com/">http://www.purplefront.com/</a></string>
+
+    <string-array name="planets_array">
+        <item/>
+        <item>Home</item>
+        <item>Exit</item>
+    </string-array>
+    <string name="str1">hi</string>
+    <string name="str2">hello</string>
+    <string name="test_paragraph">
+Can this contain a lot of text? Can it contain a newline? Yes it can.
+Adding a 2nd line like this should work.
+It should not cause parsing errors
+Can this contain a lot of text? Can it contain a newline? Yes it can.
+Adding a 2nd line like this should work.
+
+</string>
+
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- <string name="url_reference">http://ec2-52-74-59-28.ap-southeast-1.compute.amazonaws.com/school/</string> -->
+    <string name="logout">Logout</string>
+    <string name="notallowed">You did not have enough authorization</string>
+    <string name="roleerror">You do not have any role defined</string>
+    <string name="website2" translatable="false">www.yodaapp.com</string>
+    <string name="thank_you_message">Thank you for contacting us we will get back to you shortly.</string>
+
+    <!-- Change Password -->
+    <string name="changepassword_heading">Change Password</string>
+    <string name="changepassword_email">Username</string>
+    <string name="changepassword_oldpassword">Current Password</string>
+    <string name="changepassword_oldpassword_hint">Enter current password</string>
+    <string name="changepassword_newpassword">New password</string>
+    <string name="changepassword_newpassword_hint">Enter new password</string>
+    <string name="changepassword_confirmnewpassword">Confirm new Password</string>
+    <string name="changepassword_confirmnewpassword_hint">Enter confirm password</string>
+    <string name="changepassword_showpassword">Show Password</string>
+    <string name="Changepassword_submit">Submit</string>
+    <string name="changepassword_success">Your password has been changed successfully</string>
+
+    <!-- View/Edit Profile -->
+    <string name="vieweditprofile_heading">View/Edit Profile</string>
+    <string name="vieweditprofile_name">Name</string>
+    <string name="vieweditprofile_name_hint">Enter your name</string>
+    <string name="vieweditprofile_email">Email</string>
+    <string name="vieweditprofile_email_hint">Enter your email address</string>
+    <string name="vieweditprofile_setpassword">Set Password</string>
+    <string name="vieweditprofile_bsname">Business name</string>
+    <string name="vieweditprofile_bsname_hint">Enter your business name</string>
+    <string name="vieweditprofile_category">Business category</string>
+    <string name="vieweditprofile_phone">Phone</string>
+    <string name="vieweditprofile_phone_hint">Enter your 10 digit mobile number</string>
+    <string name="vieweditprofile_fbpage">FB page</string>
+    <string name="vieweditprofile_fbpage_hint">Enter your Facebook page name</string>
+    <string name="vieweditprofile_website">Website</string>
+    <string name="vieweditprofile_website_hint">Enter your official website url</string>
+    <string name="vieweditprofile_logo">Logo</string>
+    <string name="vieweditprofile_logo_discription">Select your official logo</string>
+    <string name="vieweditprofile_submit">Save</string>
+
+    <!-- PreRegistration -->
+    <string name="preregistration_heading">If you are an existing user please select existing account otherwise select new account</string>
+    <string name="preregistration_existinguser">Log In</string>
+    <string name="preregistration_newuser">Sign Up</string>
+
+    <!-- Main Activity -->
+    <string name="product_name">Product Name - </string>
+    <string name="product_description">Description - </string>
+    <string name="product_specification">Specification - </string>
+    <string name="product_category">Category - </string>
+    <string name="product_id">Id - </string>
+    <string name="product_code">Product code - </string>
+    <string name="product_images">Images </string>
+    <string name="name_2">Name - </string>
+    <string name="email_2">Email - </string>
+    <string name="contact_2">Contact - </string>
+
+    <!-- Registration -->
+    <string name="registration_heading">Create Account</string>
+    <string name="registration_firsttime">Since this is your first time so create your account first</string>
+    <string name="registration_name">Name</string>
+    <string name="registration_name_hint">Name</string>
+    <string name="registration_email">Email</string>
+    <string name="registration_email_hint">Email</string>
+    <string name="registration_setpassword">Password</string>
+    <string name="registration_setpassword_hint">Password</string>
+    <string name="registration_setpasswordconfirm">Confirm Password</string>
+    <string name="registration_setpasswordconfirm_hint">Confirm Password</string>
+    <string name="registration_submit">Next</string>
+    <string name="registration_showpassword">Show Password</string>
+
+    <!-- Reset Password -->
+    <string name="resetpassword_heading">Reset Password</string>
+    <string name="resetpassword_textemail">Enter your username</string>
+    <string name="resetpassword_submit">Reset Password</string>
+    <string name="resetpassword_note">Your username must match with our records. You will get an email with the password information.</string>
+    <string name="resetpassword_success">Success</string>
+    <string name="resetpassword_success_message">Your password has been reset. Check your email for instructions.</string>
+
+    <!-- ExistingUser -->
+    <string name="existinguser_heading">Existing Account</string>
+    <string name="existinguser_note">If you are existing user enter your email id and password otherwise go back and click new user</string>
+    <string name="existinguser_username">Username</string>
+    <string name="existinguser_username_hint">Enter your username</string>
+    <string name="existinguser_password">Password</string>
+    <string name="existinguser_password_hint">Enter your password</string>
+    <string name="existinguser_showpassword">Show password</string>
+    <string name="existinguser_login">Login</string>
+    <string name="existinguser_forgetpassword">Forgot password</string>
+
+    <!-- Basics -->
+    <string name="name">Name</string>
+    <string name="event_detail">Event detail</string>
+    <string name="relation_ship">Relationship</string>
+    <string name="userid">Username</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirmpassword">Confirm password</string>
+    <string name="facebook">Facebook</string>
+    <string name="website">Website</string>
+    <string name="timing">Timing</string>
+    <string name="address">Address</string>
+    <string name="start_date">Select start date</string>
+    <string name="end_date">Select end date</string>
+    <string name="start_date2">Start Date</string>
+    <string name="end_date2">End Date</string>
+    <string name="roles">Roles</string>
+    <string name="role">Role</string>
+    <string name="file_success">File successfully been selected</string>
+    <string name="response_server">Response from Servers</string>
+
+    <!-- File Upload -->
+    <string name="file_upload">Upload File</string>
+    <string name="file_upload_image">Upload Image</string>
+    <string name="file_upload_document">Upload Document</string>
+    <string name="file_upload_message_hint">Enter message here</string>
+
+    <!-- Event -->
+    <string name="event_update">Event has successfully updated</string>
+
+    <!-- Push Notification -->
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Push Notifications</string>
+    <string name="error_config">Please set the %1$s constant and recompile the app.</string>
+    <string name="already_registered">Device is already registered on server.</string>
+    <string name="gcm_registered">From GCM: device successfully registered!</string>
+    <string name="gcm_unregistered">From GCM: device successfully unregistered!</string>
+    <string name="gcm_message">From GCM: you got message!</string>
+    <string name="gcm_error">From GCM: error (%1$s).</string>
+    <string name="gcm_recoverable_error">From GCM: recoverable error (%1$s).</string>
+    <string name="gcm_deleted">From GCM: server deleted %1$d pending messages!</string>
+    <string name="server_registering">Trying (attempt %1$d/%2$d) to register device on Demo Server.</string>
+    <string name="server_registered">From Demo Server: successfully added device!</string>
+    <string name="server_unregistered">From Demo Server: successfully removed device!</string>
+    <string name="server_register_error">Could not register device on Demo Server after %1$d attempts.</string>
+    <string name="server_unregister_error">Could not unregister device on Demo Server (%1$s).</string>
+    <string name="options_register">Register</string>
+    <string name="options_unregister">Unregister</string>
+    <string name="options_clear">Clear</string>
+    <string name="options_exit">Exit</string>
+
+    <!-- Validation -->
+    <string name="dialog_password_title">Enter password</string>
+    <string name="dialog_password_message">Password</string>
+    <string name="dialog_password_hint">Enter your password</string>
+    <string name="dialog_password_button">Verify</string>
+    <string name="dialog_password_button2">Cancel</string>
+    <string name="dialog_password_correct">Enter correct password</string>
+    <string name="correct_name">Enter your name</string>
+    <string name="correct__name">Enter name</string>
+    <string name="correct_email">Enter your email</string>
+    <string name="correct_user_name">Enter your username</string>
+    <string name="correct_username_without_space">Enter username without any space</string>
+    <string name="username_minimum_limit">Enter username should have atleast 6 characters</string>
+    <string name="correct_email2">Enter correct email</string>
+    <string name="correct_password">Enter your password</string>
+    <string name="password_correct">Enter correct password</string>
+    <string name="correct_confirm_password">Enter your confirm password</string>
+    <string name="password_new">Enter New password</string>
+    <string name="correct_business_name">Enter business name</string>
+    <string name="correct_business_category">Select business category</string>
+    <string name="correct_contact">Enter contact number</string>
+    <string name="category_not_change">Category can not be changed</string>
+    <string name="correct_web">Enter a valid website address</string>
+    <string name="correct_limit_contact">Enter 10 digit mobile number only</string>
+    <string name="correct_mobile">Enter correct mobile number</string>
+    <string name="correct_icon">Image icon is set</string>
+    <string name="correct_icone_size">Try uploading image of less in size</string>
+    <string name="hide_password">Hide Password</string>
+    <string name="show_password">Show password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="password_limit_correct">The password should have minimum 6 characters</string>
+    <string name="confirm_password_limit_correct">Note confirm password should have minimum 6 characters</string>
+    <string name="password_new_limit">New password should have more than 6 letters</string>
+    <string name="password_confirm_password_not_match">Password and confirm password does not match</string>
+    <string name="password_space">Enter the password without spaces</string>
+    <string name="password_confirm_space">Enter the conform password without spaces</string>
+    <string name="old_new_password">Old and new password should be different</string>
+    <string name="password_match">Passwords match</string>
+    <string name="password_error">Check above data for errors and try again</string>
+    <string name="email_password">Enter correct username and password</string>
+    <string name="password_correct2">Try again with the correct password</string>
+    <string name="password_online_local_different">Old password does not match</string>
+    <string name="email_error2">Empty Email ID was sent to the server</string>
+    <string name="relationship_validation">Select relationship first</string>
+    <string name="parent_selection_validation">Select parent first</string>
+    <string name="userid_existing_message">User already exist for this username. Try different username</string>
+    <string name="password_reset_error">Some error occurred while resetting your password. Try again</string>
+    <string name="email_error">The username you have entered does not match our records. Try again.</string>
+    <string name="profile_local_online">Profile not found</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="set">Set</string>
+    <string name="proceed">Proceed</string>
+    <string name="exit">Exit</string>
+    <string name="next">Next</string>
+    <string name="save">Save</string>
+    <string name="submit">Submit</string>
+    <string name="success">Success</string>
+    <string name="send">Send</string>
+    <string name="retry">Retry</string>
+    <string name="upload">Upload</string>
+    <string name="create">Create</string>
+    <string name="action">Actions</string>
+    <string name="dialog_password_wrong_title">Wrong username or password</string>
+    <string name="dialog_password_wrong_message">"If you have forgotten the password use forgot password link or click cancel to try again</string>
+    <string name="dialog_password_wrong_button">Forgot Password</string>
+    <string name="dialog_password_wrong_button2">Cancel</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_sub_menu">SubMenuActivity</string>
+    <string name="title_activity_product__description">Product_Description</string>
+    <string name="title_activity_single_view">SingleViewActivity</string>
+    <string name="title_activity_product_list">Product_list</string>
+
+</resources>
