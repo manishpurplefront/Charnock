@@ -6,13 +6,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.Toast;
 
 public class SplashScreen extends Activity {
 
@@ -29,8 +26,8 @@ public class SplashScreen extends Activity {
         public void run() {
             ConnectivityManager cn = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo nf = cn.getActiveNetworkInfo();
-            if (nf != null && nf.isConnected() == true) {
-                Toast.makeText(SplashScreen.this, "Network Available", Toast.LENGTH_LONG).show();
+            if (nf != null && nf.isConnected()) {
+       //         Toast.makeText(SplashScreen.this, "Network Available", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                 SplashScreen.this.finish();
                 startActivity(intent);

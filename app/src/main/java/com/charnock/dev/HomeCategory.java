@@ -1,6 +1,5 @@
 package com.charnock.dev;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -14,17 +13,16 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -81,13 +79,22 @@ public class HomeCategory extends Fragment
             for (i = 0; i < feedlist.size(); i = i + 2) {
                 Log.d("id1",feedlist.get(i).getId());
                 Log.d("name1",feedlist.get(i).getName());
-                Log.d("image1",feedlist.get(i).getImage());
+                Log.d("image1", feedlist.get(i).getImage());
                 LinearLayout ll = new LinearLayout(getActivity());
                 ll.setOrientation(LinearLayout.HORIZONTAL);
                 ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
                 LinearLayout.LayoutParams p3 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 400);
                 p3.weight = 1;
+                try {
+                    feedlist.get(i + 1);
+                    p3.setMargins(0, 0, 0, 6);
+                } catch(Exception e) {
+                    p3.setMargins(0, 0, 0, 0);
+                }
+                LinearLayout.LayoutParams p3_down = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 400);
+                p3_down.weight = 1;
+                p3_down.setMargins(6,0,0,6);
 
                 LinearLayout.LayoutParams p4 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 p4.gravity = Gravity.BOTTOM;
@@ -147,7 +154,7 @@ public class HomeCategory extends Fragment
                     Log.d("name",feedlist.get(i + 1).getName());
                     Log.d("image",feedlist.get(i + 1).getImage());
                     final LinearLayout llm2 = new LinearLayout(getActivity());
-                    llm2.setLayoutParams(p3);
+                    llm2.setLayoutParams(p3_down);
                     llm2.setOrientation(LinearLayout.HORIZONTAL);
                     llm2.setId(Integer.valueOf(feedlist.get(i+1).getId()));
 
