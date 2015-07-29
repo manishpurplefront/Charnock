@@ -95,11 +95,11 @@ Adding a 2nd line like this should work.
 
     <!-- Main Activity -->
     <string name="product_name">Product Name - </string>
-    <string name="product_description">Description - </string>
-    <string name="product_specification">Specification - </string>
+    <string name="product_description">Description </string>
+    <string name="product_specification">Specification </string>
     <string name="product_category">Category - </string>
     <string name="product_id">Id - </string>
-    <string name="product_code">Product code - </string>
+    <string name="product_code">Product code  </string>
     <string name="product_images">Images </string>
     <string name="name_2">Name - </string>
     <string name="email_2">Email - </string>

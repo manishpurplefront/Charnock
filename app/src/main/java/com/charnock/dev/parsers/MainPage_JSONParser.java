@@ -22,7 +22,7 @@ public class MainPage_JSONParser {
                     Home_Model flower = new Home_Model();
                     flower.setId(obj.getString("id"));
                     flower.setName(obj.getString("name"));
-                    flower.setUser_id(obj.getString("user_id"));
+                    flower.setUser_id(obj.getString("business_id"));
                     flower.setImage(obj.getString("image"));
                     feedslist.add(flower);
                 }

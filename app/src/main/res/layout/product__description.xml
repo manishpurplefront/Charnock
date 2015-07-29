@@ -1,117 +1,147 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     tools:context="com.daimajia.slider.demo.MainActivity">
-
+    <!--<LinearLayout -->
+    <!--android:id="@+id/LinearLayout01"-->
+    <!--android:layout_width="fill_parent" -->
+    <!--android:layout_height="fill_parent"-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:orientation="vertical">-->
+    <!--<Gallery -->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/examplegallery" -->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+    <!--<ImageView -->
+    <!--android:id="@+id/ImageView01"-->
+    <!--android:layout_width="wrap_content" -->
+    <!--android:layout_height="wrap_content" />-->
+    <!--</LinearLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <com.daimajia.slider.library.SliderLayout
-        android:id="@+id/slider"
-        android:layout_width="match_parent"
-        custom:pager_animation="Accordion"
-        custom:auto_cycle="true"
-        custom:indicator_visibility="visible"
-        custom:pager_animation_span="1100"
-        android:layout_height="300dp"/>
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            custom:auto_cycle="true"
+            custom:indicator_visibility="visible"
+            custom:pager_animation="Accordion"
+            custom:pager_animation_span="1100" />
 
-    <com.daimajia.slider.library.Indicators.PagerIndicator
-        android:id="@+id/custom_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        custom:selected_color="#0095BF"
-        custom:unselected_color="#55333333"
-        custom:selected_drawable="@drawable/bird"
-        custom:shape="oval"
-        custom:selected_padding_left="5dp"
-        custom:selected_padding_right="5dp"
-        custom:unselected_padding_left="5dp"
-        custom:unselected_padding_right="5dp"
-        custom:selected_width="6dp"
-        custom:selected_height="6dp"
-        custom:unselected_width="6dp"
-        custom:unselected_height="6dp"
-        android:layout_marginBottom="20dp"
-        />
-    <com.daimajia.slider.library.Indicators.PagerIndicator
-        android:id="@+id/custom_indicator2"
-        style="@style/AndroidImageSlider_Corner_Oval_Orange"
-        android:layout_marginBottom="20dp" />
-
-        <TextView
-            android:id="@+id/product_name"
+        <com.daimajia.slider.library.Indicators.PagerIndicator
+            android:id="@+id/custom_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
-            style="@style/SimpleTextviewStyle_22" />
+            custom:selected_color="#0095BF"
+            custom:selected_drawable="@drawable/bird"
+            custom:selected_height="6dp"
+            custom:selected_padding_left="5dp"
+            custom:selected_padding_right="5dp"
+            custom:selected_width="6dp"
+            custom:shape="oval"
+            custom:unselected_color="#55333333"
+            custom:unselected_height="6dp"
+            custom:unselected_padding_left="5dp"
+            custom:unselected_padding_right="5dp"
+            custom:unselected_width="6dp" />
+
+        <com.daimajia.slider.library.Indicators.PagerIndicator
+            android:id="@+id/custom_indicator2"
+            style="@style/AndroidImageSlider_Corner_Oval_Orange"
+            android:layout_marginBottom="20dp" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/product_code"
-                style="@style/SimpleTextviewStyle_22" />
-
-            <TextView
-                android:id="@+id/product_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/SimpleTextviewStyle_22" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/product_description"
-                style="@style/SimpleTextviewStyle_22" />
-
-            <TextView
-                android:id="@+id/product_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                style="@style/SimpleTextviewStyle_22" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/llm"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/product_specification"
+                android:id="@+id/product_name"
                 style="@style/SimpleTextviewStyle_22"
-                android:id="@+id/btn_specification"/>
-
-            <TextView
-                android:id="@+id/product_specification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-                style="@style/SimpleTextviewStyle_22" />
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="25dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/SimpleTextviewStyle_22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E8E8E8"
+                    android:text="@string/product_code" />
+
+                <TextView
+                    android:id="@+id/product_code"
+                    style="@style/SimpleTextviewStyle_18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/SimpleTextviewStyle_22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E8E8E8"
+                    android:text="@string/product_description" />
+
+                <TextView
+                    android:id="@+id/product_description"
+                    style="@style/SimpleTextviewStyle_18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/btn_specification"
+                    style="@style/SimpleTextviewStyle_22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E8E8E8"
+                    android:text="@string/product_specification" />
+
+                <TextView
+                    android:id="@+id/product_specification"
+                    style="@style/SimpleTextviewStyle_18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

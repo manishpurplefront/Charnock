@@ -22,7 +22,7 @@ public class SubCategory_JSONParser {
                     JSONObject obj = ar.getJSONObject(i);
                     Sub_Category_Model flower = new Sub_Category_Model();
                     flower.setId(obj.getString("id"));
-                    flower.setName(obj.getString("name"));
+                    flower.setName(obj.getString("business_id"));
                     flower.setImage(obj.getString("image"));
                     feedslist.add(flower);
                 }

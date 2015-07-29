@@ -2,6 +2,7 @@ package com.charnock.dev;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,10 +14,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.Gallery;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,8 +44,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.support.v7.internal.widget.TintTypedArray.obtainStyledAttributes;
 
-public class Product_Description extends ActionBarActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
+
+public class Product_Description extends ActionBarActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
 
     private SliderLayout mDemoSlider;
     String tag_string_req_recieve2 = "string_req_recieve2";
@@ -52,10 +58,15 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
     String subcategory_name = "";
     String product_id = "";
     String product_name = "";
-    Button btn_specification;
-
     List<Image_Model> feedlist_image;
     List<Product_Description_Model> feedlist;
+
+//    private Gallery gallery;
+//    private ImageView imgView;
+//
+//    private Integer[] Imgid = {
+//            R.drawable.pro, R.drawable.wwe_logo, R.drawable.pro, R.drawable.wwe_logo, R.drawable.pro, R.drawable.wwe_logo, R.drawable.pro
+//    };
 
 
     @Override
@@ -63,7 +74,6 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product__description);
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
-//        btn_specification = (Button) findViewById(R.id.btn_specification);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         progress = new ProgressDialog(this);
@@ -94,6 +104,19 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
             progress.show();
             getimage_data(getResources().getString(R.string.url_reference) + "home/image_data.php");
         }
+
+//        imgView = (ImageView)findViewById(R.id.ImageView01);
+//        imgView.setImageResource(Imgid[0]);
+//
+//        gallery = (Gallery) findViewById(R.id.examplegallery);
+//        gallery.setAdapter(new AddImgAdp(this));
+//
+//        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                   @Override
+//                   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                       imgView.setImageResource(Imgid[position]);
+//                   }
+//               });
     }
 
     private void getimage_data(String uri) {
@@ -133,25 +156,10 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
         AppController.getInstance().addToRequestQueue(request, tag_string_req_recieve2);
     }
 
-//    private void displayPopupWindow(View anchorView) {
-//        PopupWindow popup = new PopupWindow(Product_Description.this);
-//        View layout = getLayoutInflater().inflate(R.layout.pop_up, null);
-//        popup.setContentView(layout);
-//        // Set content width and height
-//        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-//        popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
-//        // Closes the popup window when touch outside of it - when looses focus
-//        popup.setOutsideTouchable(true);
-//        popup.setFocusable(true);
-//        // Show anchored to button
-//        popup.setBackgroundDrawable(new BitmapDrawable());
-//        popup.showAsDropDown(anchorView);
-//    }
-
     private void updateimage() {
         progress.show();
         if(feedlist_image != null) {
- //           HashMap<String, Drawable> file_maps = new HashMap<>();
+            //           HashMap<String, Drawable> file_maps = new HashMap<>();
             HashMap<String,BitmapDrawable> file_maps = new HashMap<>();
             for(Image_Model flower: feedlist_image) {
 
@@ -182,7 +190,7 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
             mDemoSlider.addOnPageChangeListener(this);
         }
         else {
-            Toast.makeText(Product_Description.this, "No image available", Toast.LENGTH_LONG).show();
+      Toast.makeText(Product_Description.this, "No image available", Toast.LENGTH_LONG).show();
         }
         progress.hide();
     }
@@ -253,11 +261,6 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
 
     @Override
     public void onPageScrollStateChanged(int state) {}
-//
-//    @Override
-//    public void onSliderClick(BaseSliderView slider) {
-//        Toast.makeText(this,slider.getBundle().get("extra") + "",Toast.LENGTH_SHORT).show();
-//    }
 
     protected boolean isonline() {
         ConnectivityManager cm = (ConnectivityManager) Product_Description.this.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -272,6 +275,42 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
 
     @Override
     public void onSliderClick(BaseSliderView baseSliderView) {
-
     }
+
+//    public class AddImgAdp extends BaseAdapter {
+//        int GalItemBg;
+//        private Context cont;
+//
+//        public AddImgAdp(Context c) {
+//            cont = c;
+//            TypedArray typArray = obtainStyledAttributes(R.styleable.GalleryTheme);
+//            GalItemBg = typArray.getResourceId(R.styleable.GalleryTheme_android_galleryItemBackground, 0);
+//            typArray.recycle();
+//        }
+//
+//        public int getCount() {
+//            return Imgid.length;
+//        }
+//
+//        public Object getItem(int position) {
+//            return position;
+//        }
+//
+//        public long getItemId(int position) {
+//            return position;
+//        }
+//
+//        @Override
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//            ImageView imgView = new ImageView(cont);
+//
+//            imgView.setImageResource(Imgid[position]);
+//            imgView.setLayoutParams(new Gallery.LayoutParams(80, 70));
+//            imgView.setScaleType(ImageView.ScaleType.FIT_XY);
+//            imgView.setBackgroundResource(GalItemBg);
+//
+//            return imgView;
+//        }
+//
+//    }
 }

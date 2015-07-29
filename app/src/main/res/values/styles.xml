@@ -132,6 +132,15 @@
         <item name="android:textSize">22sp</item>
     </style>
 
+    <style name="SimpleTextviewStyle_18">
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="SimpleTextviewStyle_12">
         <item name="android:paddingBottom">5dp</item>
         <item name="android:paddingTop">5dp</item>

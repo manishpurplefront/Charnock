@@ -2,6 +2,8 @@ package com.charnock.dev.model;
 
 
 public class Image_Model {
+    String id;
+    String Image;
 
     public String getId() {
         return id;
@@ -18,7 +20,4 @@ public class Image_Model {
     public void setImage(String image) {
         Image = image;
     }
-
-    String id;
-    String Image;
 }
