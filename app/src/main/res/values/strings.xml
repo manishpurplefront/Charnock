@@ -35,8 +35,7 @@
     </string-array>
     <string name="str1">hi</string>
     <string name="str2">hello</string>
-    <string name="test_paragraph">
-Can this contain a lot of text? Can it contain a newline? Yes it can.
+    <string name="test_paragraph">Can this contain a lot of text? Can it contain a newline? Yes it can.
 Adding a 2nd line like this should work.
 It should not cause parsing errors
 Can this contain a lot of text? Can it contain a newline? Yes it can.
@@ -94,16 +93,16 @@ Adding a 2nd line like this should work.
     <string name="preregistration_newuser">Sign Up</string>
 
     <!-- Main Activity -->
-    <string name="product_name">Product Name - </string>
-    <string name="product_description">Description </string>
-    <string name="product_specification">Specification </string>
-    <string name="product_category">Category - </string>
-    <string name="product_id">Id - </string>
-    <string name="product_code">Product code  </string>
-    <string name="product_images">Images </string>
-    <string name="name_2">Name - </string>
-    <string name="email_2">Email - </string>
-    <string name="contact_2">Contact - </string>
+    <string name="product_name">Product Name</string>
+    <string name="product_description">Description</string>
+    <string name="product_specification">Specification</string>
+    <string name="product_category">Category</string>
+    <string name="product_id">Id</string>
+    <string name="product_code">Product code</string>
+    <string name="product_images">Images</string>
+    <string name="name_2">Name</string>
+    <string name="email_2">Email</string>
+    <string name="contact_2">Contact</string>
 
     <!-- Registration -->
     <string name="registration_heading">Create Account</string>
@@ -259,7 +258,7 @@ Adding a 2nd line like this should work.
     <string name="dialog_password_wrong_button2">Cancel</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_sub_menu">SubMenuActivity</string>
-    <string name="title_activity_product__description">Product_Description</string>
+    <string name="title_activity_product__description">Product</string>
     <string name="title_activity_single_view">SingleViewActivity</string>
     <string name="title_activity_product_list">Product_list</string>
 

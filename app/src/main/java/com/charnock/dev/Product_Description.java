@@ -2,25 +2,14 @@ package com.charnock.dev;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.Gallery;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,15 +28,12 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 
-import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static android.support.v7.internal.widget.TintTypedArray.obtainStyledAttributes;
 
-
-public class Product_Description extends ActionBarActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
+public class Product_Description extends ActionBarActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
     private SliderLayout mDemoSlider;
     String tag_string_req_recieve2 = "string_req_recieve2";
@@ -58,15 +44,11 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
     String subcategory_name = "";
     String product_id = "";
     String product_name = "";
+    String business_id = "";
+    Button btn_specification;
+
     List<Image_Model> feedlist_image;
     List<Product_Description_Model> feedlist;
-
-//    private Gallery gallery;
-//    private ImageView imgView;
-//
-//    private Integer[] Imgid = {
-//            R.drawable.pro, R.drawable.wwe_logo, R.drawable.pro, R.drawable.wwe_logo, R.drawable.pro, R.drawable.wwe_logo, R.drawable.pro
-//    };
 
 
     @Override
@@ -74,9 +56,11 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product__description);
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
+//        btn_specification = (Button) findViewById(R.id.btn_specification);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        progress = new ProgressDialog(this);
+
+        progress = new ProgressDialog(Product_Description.this);
         progress.setCancelable(false);
         progress.setMessage(getResources().getString(R.string.loading));
         progress.setTitle(getResources().getString(R.string.please_wait));
@@ -90,8 +74,14 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
         subcategory_name = getIntent().getExtras().getString("subcategory_name");
         product_id = getIntent().getExtras().getString("product_id");
         product_name = getIntent().getExtras().getString("product_name");
-        Product_Description.this.setTitle(product_name);
+        business_id = getIntent().getExtras().getString("business_id");
 
+        try {
+            getActionBar().setTitle(product_name);
+            getActionBar().setSubtitle("Product");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (isonline()) {
             progress.show();
@@ -104,25 +94,13 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
             progress.show();
             getimage_data(getResources().getString(R.string.url_reference) + "home/image_data.php");
         }
-
-//        imgView = (ImageView)findViewById(R.id.ImageView01);
-//        imgView.setImageResource(Imgid[0]);
-//
-//        gallery = (Gallery) findViewById(R.id.examplegallery);
-//        gallery.setAdapter(new AddImgAdp(this));
-//
-//        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                   @Override
-//                   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                       imgView.setImageResource(Imgid[position]);
-//                   }
-//               });
     }
 
     private void getimage_data(String uri) {
         StringRequest request = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
+                Log.d("response", s);
                 switch (s) {
                     case "":
                         Toast.makeText(Product_Description.this, "No image available", Toast.LENGTH_LONG).show();
@@ -131,7 +109,7 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
                         Toast.makeText(Product_Description.this, "No image available", Toast.LENGTH_LONG).show();
                         break;
                     default:
-                        Log.d("response", s);
+
                         feedlist_image = Image_JSONParser.parserFeed(s);
                         updateimage();
                         break;
@@ -150,6 +128,7 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("id",product_id);
+                params.put("business_id",business_id);
                 return params;
             }
         };
@@ -159,24 +138,17 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
     private void updateimage() {
         progress.show();
         if(feedlist_image != null) {
-            //           HashMap<String, Drawable> file_maps = new HashMap<>();
-            HashMap<String,BitmapDrawable> file_maps = new HashMap<>();
+ //           HashMap<String, Drawable> file_maps = new HashMap<>();
+            HashMap<String,String> file_maps = new HashMap<>();
             for(Image_Model flower: feedlist_image) {
 
-                byte[] imageByteArray = Base64.decode(flower.getImage(), Base64.DEFAULT);
-                if (imageByteArray != null) {
-                    ByteArrayInputStream imageStream = new ByteArrayInputStream(imageByteArray);
-                    Bitmap company_logo = BitmapFactory.decodeStream(imageStream);
-
-                    BitmapDrawable drawable = new BitmapDrawable(getResources(),company_logo );
-                    file_maps.put(flower.getId(), drawable);
-                }
+                    file_maps.put(flower.getId(), flower.getImage());
             }
             for(String name : file_maps.keySet()){
                 TextSliderView textSliderView = new TextSliderView(this);
                 textSliderView
-                        .description(name)
-                        .image(String.valueOf(file_maps.get(name)))
+                        .description(product_name)
+                        .image(file_maps.get(name))
                         .setScaleType(BaseSliderView.ScaleType.Fit)
                         .setOnSliderClickListener(this);
 
@@ -190,7 +162,7 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
             mDemoSlider.addOnPageChangeListener(this);
         }
         else {
-      Toast.makeText(Product_Description.this, "No image available", Toast.LENGTH_LONG).show();
+            Toast.makeText(Product_Description.this, "No image available", Toast.LENGTH_LONG).show();
         }
         progress.hide();
     }
@@ -261,6 +233,11 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
 
     @Override
     public void onPageScrollStateChanged(int state) {}
+//
+//    @Override
+//    public void onSliderClick(BaseSliderView slider) {
+//        Toast.makeText(this,slider.getBundle().get("extra") + "",Toast.LENGTH_SHORT).show();
+//    }
 
     protected boolean isonline() {
         ConnectivityManager cm = (ConnectivityManager) Product_Description.this.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -275,42 +252,6 @@ public class Product_Description extends ActionBarActivity implements BaseSlider
 
     @Override
     public void onSliderClick(BaseSliderView baseSliderView) {
-    }
 
-//    public class AddImgAdp extends BaseAdapter {
-//        int GalItemBg;
-//        private Context cont;
-//
-//        public AddImgAdp(Context c) {
-//            cont = c;
-//            TypedArray typArray = obtainStyledAttributes(R.styleable.GalleryTheme);
-//            GalItemBg = typArray.getResourceId(R.styleable.GalleryTheme_android_galleryItemBackground, 0);
-//            typArray.recycle();
-//        }
-//
-//        public int getCount() {
-//            return Imgid.length;
-//        }
-//
-//        public Object getItem(int position) {
-//            return position;
-//        }
-//
-//        public long getItemId(int position) {
-//            return position;
-//        }
-//
-//        @Override
-//        public View getView(int position, View convertView, ViewGroup parent) {
-//            ImageView imgView = new ImageView(cont);
-//
-//            imgView.setImageResource(Imgid[position]);
-//            imgView.setLayoutParams(new Gallery.LayoutParams(80, 70));
-//            imgView.setScaleType(ImageView.ScaleType.FIT_XY);
-//            imgView.setBackgroundResource(GalItemBg);
-//
-//            return imgView;
-//        }
-//
-//    }
+    }
 }

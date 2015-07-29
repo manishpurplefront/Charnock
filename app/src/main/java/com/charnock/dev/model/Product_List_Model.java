@@ -3,6 +3,15 @@ package com.charnock.dev.model;
 public class Product_List_Model {
     String product_id;
     String product_name;
+    String product_image;
+
+    public String getProduct_image() {
+        return product_image;
+    }
+
+    public void setProduct_image(String product_image) {
+        this.product_image = product_image;
+    }
 
     public String getProduct_id() {
         return product_id;

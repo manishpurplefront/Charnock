@@ -2,7 +2,6 @@ package com.charnock.dev.parsers;
 
 import android.util.Log;
 
-import com.charnock.dev.model.Home_Model;
 import com.charnock.dev.model.Product_List_Model;
 
 import org.json.JSONArray;
@@ -22,6 +21,7 @@ public class ProductList_JSONParser {
                 Product_List_Model flower = new Product_List_Model();
                 flower.setProduct_id(obj.getString("id"));
                 flower.setProduct_name(obj.getString("name"));
+                flower.setProduct_image(obj.getString("image"));
                 feedslist.add(flower);
             }
             return feedslist;
