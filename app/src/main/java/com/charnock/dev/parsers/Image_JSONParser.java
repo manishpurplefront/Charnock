@@ -20,6 +20,7 @@ public class Image_JSONParser {
                 JSONObject obj = ar.getJSONObject(i);
                 Image_Model flower = new Image_Model();
                 flower.setId(obj.getString("id"));
+                flower.setName(obj.getString("name"));
                 flower.setImage(obj.getString("image"));
                 feedslist.add(flower);
             }

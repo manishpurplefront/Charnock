@@ -3,6 +3,10 @@ package com.charnock.dev.model;
 
 public class Image_Model {
 
+    String id;
+    String Image;
+    String name;
+
     public String getId() {
         return id;
     }
@@ -19,6 +23,11 @@ public class Image_Model {
         Image = image;
     }
 
-    String id;
-    String Image;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

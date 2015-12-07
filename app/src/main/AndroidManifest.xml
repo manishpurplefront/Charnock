@@ -5,21 +5,19 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <!--
+     To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect
+     option is required to comply with the Google+ Sign-In developer policies
+    -->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <!-- To retrieve the account name (email) as part of sign-in: -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <permission
-        android:name="com.charnock.dev.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
-
-    <!-- Permission to vibrate -->
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-    <!-- This app has permission to register and receive data message. -->
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".controller.AppController"
@@ -30,7 +28,6 @@
         <activity
             android:name=".SplashScreen"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme_noactionbar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,7 +41,7 @@
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:noHistory="true">
         </activity>
         <activity
             android:name=".SubCategory"
@@ -56,12 +53,136 @@
             android:name=".Product_Description"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_activity_product__description"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat" >
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Product_list"
-            android:label="@string/title_activity_product_list" >
+            android:label="@string/title_activity_product_list"></activity>
+        <activity
+            android:name=".Request_Information"
+            android:label="@string/title_activity_request_quota"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".Video_Player"
+            android:label="@string/title_activity_video__players"></activity>
+        <activity
+            android:name=".Registration"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".Editprofile"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".NoInternetAlert"></activity>
+        <activity android:name=".Change_Password"></activity>
+        <activity android:name=".Service_Create"></activity>
+        <activity
+            android:name=".Service_Create2"
+            android:label="Select Product to Service" />
+        <activity
+            android:name=".Service_Create_Address_Select"
+            android:label="Select Contact Person Address" />
+        <activity android:name=".ServiceDEmo"></activity>
+        <activity
+            android:name=".Service_Request_Deatils"
+            android:label="Service Request Details" />
+        <activity
+            android:name=".Reset_Password"
+            android:label="@string/title_activity_reset__password"></activity>
+        <activity
+            android:name=".EditRequestVisitDate"
+            android:label="@string/title_activity_edit_request_visit_date"></activity>
+        <activity
+            android:name=".UpdateStatus"
+            android:label="@string/title_activity_update_status"></activity>
+        <activity
+            android:name=".AddServiceProducts"
+            android:label="@string/title_activity_add_service_products"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".UpdateVisitDetils"
+            android:label="@string/title_activity_update_visit_detils"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".ServiceProducts"
+            android:label="@string/title_activity_service_products"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".ServiceAlljobs"
+            android:label="@string/title_activity_service_alljobs"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".ServiceJobDetails"
+            android:label="@string/title_activity_service_job_details"></activity>
+        <activity
+            android:name=".ServiceLocationDetails"
+            android:label="@string/title_activity_service_location_details"
+            android:windowSoftInputMode="stateHidden">
+
+        </activity>
+        <activity
+            android:name=".CustomerServiceRequest"
+            android:label="@string/title_activity_customer_service_request"></activity>
+        <activity
+            android:name=".branch_manager.MainActivity"
+            android:label="@string/title_activity_main"></activity>
+        <activity
+            android:name=".branch_manager.Service_Request_Deatils"
+            android:label="@string/title_activity_main"></activity>
+        <activity
+            android:name=".branch_manager.EditRequestVisitDate"
+            android:label="@string/title_activity_main"></activity>
+
+        <activity
+            android:name=".service_engineer.Service_Request_Details_Engineer"
+            android:label="@string/title_activit_service_details" />
+
+        <activity
+            android:name=".service_engineer.ServiceAlljobs"
+            android:label="@string/title_activity_service_alljobs" />
+
+        <activity
+            android:name=".MysampleActivity"
+            android:label="@string/title_activity_mysample">
+            <!-- <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>-->
         </activity>
     </application>
 

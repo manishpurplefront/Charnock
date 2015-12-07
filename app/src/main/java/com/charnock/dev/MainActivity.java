@@ -1,13 +1,14 @@
 package com.charnock.dev;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -18,15 +19,24 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.charnock.dev.model.Database;
+import com.charnock.dev.service_engineer.Service_Request_View_service_engineer;
 
-public class MainActivity extends Activity {
+import java.util.List;
 
+
+public class MainActivity extends FragmentActivity {
+
+    List<Database> database;
+    String status;
+    Boolean get_this = true;
+    ObjectDrawerItem[] drawerItem;
+    String redirection = "", permissionId = "";
     private String[] mPlanetTitles;
+    private String[] mPlanetTitles1;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
-
     private ActionBarDrawerToggle mDrawerToggle;
-
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
@@ -41,28 +51,50 @@ public class MainActivity extends Activity {
 //        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
 
         mTitle = mDrawerTitle = getTitle();
+
+        try {
+            dbhelp.DatabaseHelper2 db = new dbhelp.DatabaseHelper2(this);
+            database = db.getdatabase();
+            Log.d("id", database.get(0).getId());
+            Log.d("name", database.get(0).getName());
+            Log.d("email", database.get(0).getEmail());
+            Log.d("password", database.get(0).getPassword());
+            permissionId = database.get(0).getPermission_id();
+            Log.v("permissionId", permissionId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         mPlanetTitles = getResources().getStringArray(R.array.planets_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
-
         try {
             mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         } catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
 
-        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[2];
-        drawerItem[0] = new ObjectDrawerItem(R.drawable.exit_icon1, "Home");
-        drawerItem[1] = new ObjectDrawerItem(R.drawable.exit_icon1, "Exit");
+
+        if (database == null) {
+            drawerItem = new ObjectDrawerItem[2];
+            drawerItem[0] = new ObjectDrawerItem(R.drawable.home, "Catalog");
+            drawerItem[1] = new ObjectDrawerItem(R.drawable.profile, "Service Request");
+        } else {
+            drawerItem = new ObjectDrawerItem[4];
+            drawerItem[0] = new ObjectDrawerItem(R.drawable.home, "Catalog");
+            drawerItem[1] = new ObjectDrawerItem(R.drawable.profile, "Service Request");
+            drawerItem[2] = new ObjectDrawerItem(R.drawable.exit_icon1, "Settings");
+            drawerItem[3] = new ObjectDrawerItem(R.drawable.exit_icon1, "Exit");
+        }
 
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.drawer_list_item, drawerItem);
         mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-            getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
 //        Log.d("planet","point 5");
 
@@ -90,11 +122,60 @@ public class MainActivity extends Activity {
         selectItem(0);
 //        Log.d("planet","point 7");
 
-        // Redirecting user to page requested in intent after clicking on menu drawer activity
+        try {
+            redirection = getIntent().getExtras().getString("redirection");
+            if (redirection != null) {
+                if (redirection.equals("Service Create")) {
+
+                    Log.d("permissin_id", database.get(0).getPermission_id());
+                    Log.d("role_id", database.get(0).getRole_id());
+
+                    if (database.get(0).getPermission_id().equals("4") && database.get(0).getRole_id().equals("4")) {
+                        Toast.makeText(MainActivity.this, "This feature is currently in cunstruction", Toast.LENGTH_LONG).show();
+                    } else if (database.get(0).getPermission_id().equals("2") && database.get(0).getRole_id().equals("3")) {
+                        Toast.makeText(MainActivity.this, "This feature is currently in cunstruction", Toast.LENGTH_LONG).show();
+                    } else if (database.get(0).getPermission_id().equals("3") && database.get(0).getRole_id().equals("5")) {
+                        Fragment fragment = new Service_Request_View_service_engineer();
+                        Bundle args = new Bundle();
+                        fragment.setArguments(args);
+
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+                        transaction.replace(R.id.content_frame, fragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    } else {
+                        Fragment fragment = new Service_Request_View();
+                        Bundle args = new Bundle();
+                        fragment.setArguments(args);
+
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+                        transaction.replace(R.id.content_frame, fragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    }
+
+
+                } else if (redirection.equals("Login")) {
+
+                    Fragment fragment = new Login();
+                    Bundle args = new Bundle();
+                    fragment.setArguments(args);
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+                    transaction.replace(R.id.content_frame, fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -104,7 +185,7 @@ public class MainActivity extends Activity {
             return true;
         }
         // Handle action buttons
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
         /*case R.id.action_websearch:
             // create intent to perform web search for this planet
             Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
@@ -122,54 +203,20 @@ public class MainActivity extends Activity {
         }
     }
 
-
-
-    /* The click listner for ListView in the navigation drawer */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            String planet = getResources().getStringArray(R.array.planets_array)[position];
-//            Log.d("planet",planet);
-            //        selectItem(position);
-            mDrawerLayout.closeDrawer(mDrawerList);
-            Fragment fragment;
-            switch (planet) {
-                case "Home":
-                {
-                    selectItem(0);
-                }
-                case "Exit":
-                {
-                    System.exit(0);
-                    android.os.Process.killProcess(android.os.Process.myPid());
-                    break;
-                }
-                default:
-//                    Toast.makeText(MainActivity.this,"Unkown error found",Toast.LENGTH_LONG).show();
-//                    System.exit(0);
-//                    android.os.Process.killProcess(android.os.Process.myPid());
-                    break;
-            }
-        }
-
-    }
     private void selectItem(int position) {
 
-        Fragment test;
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        test = new HomeCategory();
+        Fragment fragment = new HomeCategory();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
 
-        fragmentTransaction.setCustomAnimations(
-                R.animator.fragment_slide_left_enter,
-                R.animator.fragment_slide_left_exit,
-                R.animator.fragment_slide_right_enter,
-                R.animator.fragment_slide_right_exit);
-        fragmentTransaction.replace(R.id.content_frame, test);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+        transaction.replace(R.id.content_frame, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
 
         // update selected item and title, then close the drawer
+        mDrawerList.setItemChecked(position, true);
         mDrawerList.setItemChecked(position, true);
         setTitle(mPlanetTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
@@ -205,5 +252,145 @@ public class MainActivity extends Activity {
         super.finish();
         System.exit(0);
         android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    /* The click listner for ListView in the navigation drawer */
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            String planet = drawerItem[position].name;
+            mDrawerLayout.closeDrawer(mDrawerList);
+//            String planet = getResources().getStringArray(R.array.planets_array1)[position];
+//            if(get_this) {
+//                planet = getResources().getStringArray(R.array.planets_array)[position];
+//                mDrawerLayout.closeDrawer(mDrawerList);
+//            } else {
+//                planet = getResources().getStringArray(R.array.planets_array_not_logged_in)[position];
+//                mDrawerLayout.closeDrawer(mDrawerList);
+//            }
+            switch (planet) {
+                case "Catalog": {
+                    selectItem(0);
+                    break;
+                }
+                case "Service Request": {
+                    if (database == null) {
+                        Fragment fragment = new Login();
+                        Bundle args = new Bundle();
+                        fragment.setArguments(args);
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+                        transaction.replace(R.id.content_frame, fragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    } else {
+
+                        try {
+                            Log.d("permissin_id", database.get(0).getPermission_id());
+                            Log.d("role_id", database.get(0).getRole_id());
+
+                            if (database.get(0).getPermission_id().equals("4") && database.get(0).getRole_id().equals("4")) {
+                                Toast.makeText(MainActivity.this, "This feature is currently in cunstruction", Toast.LENGTH_LONG).show();
+                            } else if (database.get(0).getPermission_id().equals("2") && database.get(0).getRole_id().equals("3")) {
+                                Toast.makeText(MainActivity.this, "This feature is currently in cunstruction", Toast.LENGTH_LONG).show();
+                            } else if (database.get(0).getPermission_id().equals("3") && database.get(0).getRole_id().equals("5")) {
+                                Fragment fragment = new Service_Request_View_service_engineer();
+                                Bundle args = new Bundle();
+                                fragment.setArguments(args);
+
+                                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                                transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+                                transaction.replace(R.id.content_frame, fragment);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+                            } else {
+
+                                Fragment fragment = new Service_Request_View();
+                                Bundle args = new Bundle();
+                                fragment.setArguments(args);
+
+                                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                                transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+                                transaction.replace(R.id.content_frame, fragment);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    }
+                    break;
+                }
+                case "Settings": {
+                    if (database == null) {
+
+                        Fragment fragment = new Login();
+                        Bundle args = new Bundle();
+                        fragment.setArguments(args);
+
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+                        transaction.replace(R.id.content_frame, fragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+
+                    } else {
+                        selectItem(0);
+                    }
+                    break;
+                }
+                case "Change Password": {
+                    finish();
+                    Intent intent = new Intent(MainActivity.this, Change_Password.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+                    break;
+                }
+                case "LogOut": {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setCancelable(false)
+                            .setMessage(getResources().getString(R.string.logout_warning))
+                            .setNegativeButton(getResources().getString(R.string.logout), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dbhelp db = new dbhelp(MainActivity.this);
+                                    db.open();
+                                    db.logoout();
+                                    db.close();
+                                    finish();
+                                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                                    overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+                                    startActivity(intent);
+                                    MainActivity.this.overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+                                }
+                            })
+                            .setPositiveButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    break;
+                }
+                case "Exit": {
+                    finish();
+                    System.exit(0);
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    break;
+                }
+                default:
+                    System.exit(0);
+                    android.os.Process.killProcess(android.os.Process.myPid());
+//                    Toast.makeText(MainActivity.this,"Unkown error found",Toast.LENGTH_LONG).show();
+//                    System.exit(0);
+//                    android.os.Process.killProcess(android.os.Process.myPid());
+                    break;
+            }
+        }
     }
 }

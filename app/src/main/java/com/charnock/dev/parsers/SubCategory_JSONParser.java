@@ -2,7 +2,6 @@ package com.charnock.dev.parsers;
 
 import android.util.Log;
 
-import com.charnock.dev.model.Home_Model;
 import com.charnock.dev.model.Sub_Category_Model;
 
 import org.json.JSONArray;

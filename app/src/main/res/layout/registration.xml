@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView1"
+    style="@style/Layout2_lightred"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextviewStyle_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registration_title_hint" />
+
+        <Spinner
+            android:id="@+id/registation_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/registration_title_hint" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/TextviewStyle_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registration_name_hint" />
+
+        <EditText
+            android:id="@+id/registration_name"
+            style="@style/EditTextviewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/apptheme_edit_text_holo_light"
+            android:ems="10"
+            android:inputType="text|textPersonName|textNoSuggestions" />
+
+        <TextView
+            android:id="@+id/tv_business_nme"
+            style="@style/TextviewStyle_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registration_business_name_hint" />
+
+        <EditText
+            android:id="@+id/registration_business_name"
+            style="@style/EditTextviewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/apptheme_edit_text_holo_light"
+            android:ems="10"
+            android:inputType="text|textCapWords|textNoSuggestions" />
+
+        <TextView
+            android:id="@+id/tv_address_line1"
+            style="@style/TextviewStyle_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registration_Address_line1_hint" />
+
+        <EditText
+            android:id="@+id/registration_address"
+            style="@style/EditTextviewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/apptheme_edit_text_holo_light"
+            android:ems="10"
+            android:inputType="textMultiLine|textPostalAddress" />
+
+        <TextView
+            android:id="@+id/tv_address_line2"
+            style="@style/TextviewStyle_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registration_Address_line2_hint" />
+
+        <EditText
+            android:id="@+id/registration_address_2"
+            style="@style/EditTextviewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/apptheme_edit_text_holo_light"
+            android:ems="10"
+            android:inputType="textMultiLine|textPostalAddress" />
+
+        <TextView
+            android:id="@+id/tv_address_line3"
+            style="@style/TextviewStyle_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registration_Address_line3_hint" />
+
+        <EditText
+            android:id="@+id/registration_address_3"
+            style="@style/EditTextviewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/apptheme_edit_text_holo_light"
+            android:ems="10"
+            android:inputType="textMultiLine|textPostalAddress" />
+
+        <LinearLayout
+            android:id="@+id/city_pincode_p"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/reg_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_reg_city"
+                    style="@style/TextviewStyle_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/registration_city_hint" />
+
+                <EditText
+                    android:id="@+id/registration_city"
+                    style="@style/EditTextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/apptheme_edit_text_holo_light"
+                    android:ems="10"
+                    android:inputType="text|textCapWords|textNoSuggestions" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/reg_pincode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_reg_pincode"
+                    style="@style/TextviewStyle_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/registration_pin_code_hint" />
+
+                <EditText
+                    android:id="@+id/registration_pin_code"
+                    style="@style/EditTextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/apptheme_edit_text_holo_light"
+                    android:ems="10"
+                    android:inputType="phone|textPhonetic|textNoSuggestions" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextviewStyle_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="State" />
+
+
+        <Spinner
+            android:id="@+id/registration_state"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/registration_state_hint" />
+
+
+        <TextView
+            android:id="@+id/tv_reg_phone"
+            style="@style/TextviewStyle_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registration_phone_hint" />
+
+        <EditText
+            android:id="@+id/registration_phone"
+            style="@style/EditTextviewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/apptheme_edit_text_holo_light"
+            android:ems="10"
+            android:inputType="phone|textNoSuggestions" />
+
+        <TextView
+            android:id="@+id/tv_reg_email"
+            style="@style/TextviewStyle_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registration_email_hint" />
+
+        <EditText
+            android:id="@+id/registration_email"
+            style="@style/EditTextviewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress|textCapWords" />
+
+        <Button
+            android:id="@+id/registation_sign_up"
+            style="@style/Button_style"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/registration_submit" />
+    </LinearLayout>
+
+</ScrollView>

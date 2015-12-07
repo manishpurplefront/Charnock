@@ -1,0 +1,107 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/product_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/select_border"
+                android:gravity="center_horizontal"
+                android:text="Product"
+                android:textColor="@android:color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/TextviewStyle_space_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/service_category_name" />
+
+            <Spinner
+                android:id="@+id/service_category_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog" />
+
+            <TextView
+                style="@style/TextviewStyle_space_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/service_subcategory_name" />
+
+            <Spinner
+                android:id="@+id/service_subcategory_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog" />
+
+            <TextView
+                style="@style/TextviewStyle_space_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/service_product_name" />
+
+            <Spinner
+                android:id="@+id/service_product_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog" />
+
+            <TextView
+                style="@style/TextviewStyle_space_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/service_warranty" />
+
+            <Spinner
+                android:id="@+id/service_warranty_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog" />
+
+            <TextView
+                style="@style/TextviewStyle_space_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/problem_desc" />
+
+            <EditText
+                android:id="@+id/service_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="@string/service_desc"
+                android:inputType="textMultiLine" />
+
+            <!--<View-->
+            <!--android:id="@+id/View1"-->
+            <!--style="@style/Divider4"-->
+            <!--android:layout_marginTop="50dp" />-->
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

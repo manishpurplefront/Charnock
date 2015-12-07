@@ -5,7 +5,16 @@ public class Home_Model {
     String id;
     String name;
     String user_id;
+    String description;
     String image;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getId() {
         return id;

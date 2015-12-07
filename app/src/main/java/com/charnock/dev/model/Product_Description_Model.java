@@ -8,6 +8,15 @@ public class Product_Description_Model {
     String product_name;
     String product_description;
     String Product_specification;
+    String video_url;
+
+    public String getVideo_url() {
+        return video_url;
+    }
+
+    public void setVideo_url(String video_url) {
+        this.video_url = video_url;
+    }
 
     public String getProduct_code() {
         return product_code;

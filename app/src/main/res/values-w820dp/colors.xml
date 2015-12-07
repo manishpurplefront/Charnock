@@ -3,10 +3,25 @@
     <color name="blue">#33b5e5</color>
     <color name="darkblue">#0099cc</color>
     <color name="red">#ff4444</color>
+    <color name="red_background">#90fee5e5</color>
     <color name="grayStart">#adadad</color>
     <color name="grayEnd">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="graylight">#f7f7f7</color>
+    <color name="gray_200">#eeeeee</color>
+    <color name="bar_color">#d42227</color>
     <color name="bg_handle_pressed">#a0a0a0</color>
     <color name="offer_border">#009aaf</color>
     <color name="offer_background">#bce6ee</color>
+
+    <color name="actionbar_background">#808080</color>
+    <color name="actionbar_text">#0000FF</color>
+    <color name="review_color">#f2f2f2</color>
+
+    <color name="colorPrimary">#125688</color>
+    <color name="colorPrimaryDark">#125688</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="colorAccent">#c8e8ff</color>
 </resources>

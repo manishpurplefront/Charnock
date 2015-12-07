@@ -1,25 +1,27 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#bebebe"
+    android:orientation="vertical"
     tools:context="com.daimajia.slider.demo.MainActivity">
 
     <LinearLayout
+        android:id="@+id/linear_descp"
+        style="@style/Layout2_lightred"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:orientation="vertical">
 
         <com.daimajia.slider.library.SliderLayout
             android:id="@+id/slider"
             android:layout_width="match_parent"
-            custom:pager_animation="Accordion"
+            android:layout_height="300dp"
             custom:auto_cycle="true"
             custom:indicator_visibility="visible"
-            custom:pager_animation_span="1100"
-            android:layout_height="300dp"/>
+            custom:pager_animation="Accordion"
+            custom:pager_animation_span="1100" />
 
         <com.daimajia.slider.library.Indicators.PagerIndicator
             android:id="@+id/custom_indicator"
@@ -27,17 +29,17 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             custom:selected_color="#0095BF"
-            custom:unselected_color="#55333333"
             custom:selected_drawable="@drawable/bird"
-            custom:shape="oval"
+            custom:selected_height="6dp"
             custom:selected_padding_left="5dp"
             custom:selected_padding_right="5dp"
+            custom:selected_width="6dp"
+            custom:shape="oval"
+            custom:unselected_color="#55333333"
+            custom:unselected_height="6dp"
             custom:unselected_padding_left="5dp"
             custom:unselected_padding_right="5dp"
-            custom:selected_width="6dp"
-            custom:selected_height="6dp"
-            custom:unselected_width="6dp"
-            custom:unselected_height="6dp"/>
+            custom:unselected_width="6dp" />
 
         <com.daimajia.slider.library.Indicators.PagerIndicator
             android:id="@+id/custom_indicator2"
@@ -50,18 +52,18 @@
 
             <TextView
                 android:id="@+id/textView2"
+                style="@style/SimpleTextviewStyle_22_black"
                 android:layout_width="wrap_content"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text="@string/product_code"
-                style="@style/SimpleTextviewStyle_22_black" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/product_code"
-                android:visibility="gone"
+                style="@style/SimpleTextviewStyle_22_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/SimpleTextviewStyle_22_black" />
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -69,56 +71,111 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:elevation="5dp"
             android:background="#FFFFFF"
+            android:elevation="5dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/product_name"
+                style="@style/SimpleTextviewStyle_22_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                style="@style/SimpleTextviewStyle_22_black" />
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/textView3"
+                style="@style/TextviewStyle_gray_19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/product_description"
-                style="@style/TextviewStyle_gray_19" />
+                android:text="@string/product_description" />
 
             <TextView
                 android:id="@+id/product_description"
+                style="@style/SimpleTextviewStyle_16"
                 android:layout_width="wrap_content"
-                android:text="@string/product_description"
                 android:layout_height="wrap_content"
-                style="@style/SimpleTextviewStyle_16" />
+                android:text="@string/product_description" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#FFFFFF"
+            android:elevation="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/btn_specification"
+                style="@style/TextviewStyle_gray_19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/product_specification" />
+
+            <TableLayout
+                android:id="@+id/table1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+            </TableLayout>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/llm"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:elevation="5dp"
-            android:background="#FFFFFF"
-            android:orientation="vertical">
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/product_specification"
-                style="@style/TextviewStyle_gray_19"
-                android:id="@+id/btn_specification"/>
+            <Button
+                android:id="@+id/btn_request"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/button_shadow2"
+                android:gravity="center"
+                android:text="@string/request_information"
+                android:textColor="@color/abc_primary_text_disable_only_material_light" />
 
-            <TextView
-                android:id="@+id/product_specification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/product_specification"
-                style="@style/SimpleTextviewStyle_16" />
+            <Button
+                android:id="@+id/btn_demo_video"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_shadow2"
+                android:gravity="center"
+                android:text="@string/demo_video"
+                android:textColor="@color/abc_primary_text_disable_only_material_light" />
         </LinearLayout>
+
+        <!--<android.support.design.widget.CoordinatorLayout-->
+        <!--android:id="@+id/main_content"-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:src="@drawable/ic_edit"-->
+        <!--app:fabSize="normal"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+        <!--</android.support.design.widget.CoordinatorLayout>-->
     </LinearLayout>
+
 </ScrollView>

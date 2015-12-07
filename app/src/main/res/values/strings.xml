@@ -2,11 +2,14 @@
 <resources>
 
     <string name="app_name">Charnock</string>
+    <string name="app_name_home">Charnock Home</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="by_purplefront">by PurpleFront</string>
-    <string name="customer_feedback_app">School App</string>
+    <string name="customer_feedback_app">Charnock App</string>
     <string name="nointernetaccess">No Internet Access</string>
+    <string name="nointernetaccess_messgae">No Internet Access try again</string>
+    <string name="password_online_local_different">Old password does not match</string>
     <string name="nointernetconnection">No Internet Connection</string>
     <string name="unknownerror">Some thing went wrong contact PurpleFront for the issue.</string>
     <string name="unknownerror2">Some error occurred try again</string>
@@ -17,6 +20,7 @@
     <string name="unknownerror7">No response from server</string>
     <string name="unknownerror8">Error contacting server</string>
     <string name="unknownerror9">Error accessing server try reloading the page</string>
+    <string name="unknownerror10">An error occurred while accessing server try again. If problem persists contact charnock for the issue</string>
     <string name="error_occured">No Internet Access an error has occurred try again</string>
     <string name="permission_error">You do not have enough permission to send message</string>
     <string name="permission_error_calender">You do not have enough permission to create event</string>
@@ -25,24 +29,38 @@
     <string name="please_wait">Please wait</string>
     <string name="message">New Message:</string>
     <string name="sender_id">963510041615</string>
-    <string name="url_reference">http://purplefront.net/charnock/</string>
-    <string name="demo_video"><a href="http://www.purplefront.com/">http://www.purplefront.com/</a></string>
+    <string name="url_reference">http://purplefront.net/charnock_dev/</string>
+    <string name="YoutubeDeveloperKey">AIzaSyA0XSrhhUbnJrecvoWyDj2dButtR6Y06A0</string>
+    <string name="actionbar_text_color">#ffffff</string>
+    <string name="divider_color">#ebebeb</string>
 
     <string-array name="planets_array">
-        <item/>
         <item>Home</item>
+        <item>View/Edit Profile</item>
+        <item>Change Password</item>
+        <item>LogOut</item>
         <item>Exit</item>
     </string-array>
-    <string name="str1">hi</string>
-    <string name="str2">hello</string>
-    <string name="test_paragraph">Can this contain a lot of text? Can it contain a newline? Yes it can.
-Adding a 2nd line like this should work.
-It should not cause parsing errors
-Can this contain a lot of text? Can it contain a newline? Yes it can.
-Adding a 2nd line like this should work.
 
-</string>
+    <string-array name="number_of_products">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
 
+
+    <string-array name="planets_array_logged_in">
+        <item>Home</item>
+        <item>Login</item>
+        <item>Exit</item>
+    </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -51,7 +69,7 @@ Adding a 2nd line like this should work.
     <string name="logout">Logout</string>
     <string name="notallowed">You did not have enough authorization</string>
     <string name="roleerror">You do not have any role defined</string>
-    <string name="website2" translatable="false">www.yodaapp.com</string>
+    <string name="website2" translatable="false">www.charnock.biz</string>
     <string name="thank_you_message">Thank you for contacting us we will get back to you shortly.</string>
 
     <!-- Change Password -->
@@ -66,6 +84,9 @@ Adding a 2nd line like this should work.
     <string name="changepassword_showpassword">Show Password</string>
     <string name="Changepassword_submit">Submit</string>
     <string name="changepassword_success">Your password has been changed successfully</string>
+    <string name="change_password_correct">Try again with the correct password</string>
+    <string name="password_online_local_different1">Local and online profile password differs</string>
+
 
     <!-- View/Edit Profile -->
     <string name="vieweditprofile_heading">View/Edit Profile</string>
@@ -73,24 +94,57 @@ Adding a 2nd line like this should work.
     <string name="vieweditprofile_name_hint">Enter your name</string>
     <string name="vieweditprofile_email">Email</string>
     <string name="vieweditprofile_email_hint">Enter your email address</string>
+    <string name="vieweditprofile_email_hint1">Enter your email</string>
     <string name="vieweditprofile_setpassword">Set Password</string>
     <string name="vieweditprofile_bsname">Business name</string>
     <string name="vieweditprofile_bsname_hint">Enter your business name</string>
+    <string name="vieweditprofile_sitename_hint">Enter your business name</string>
     <string name="vieweditprofile_category">Business category</string>
     <string name="vieweditprofile_phone">Phone</string>
     <string name="vieweditprofile_phone_hint">Enter your 10 digit mobile number</string>
     <string name="vieweditprofile_fbpage">FB page</string>
     <string name="vieweditprofile_fbpage_hint">Enter your Facebook page name</string>
-    <string name="vieweditprofile_website">Website</string>
-    <string name="vieweditprofile_website_hint">Enter your official website url</string>
-    <string name="vieweditprofile_logo">Logo</string>
+    <string name="vieweditprofile_address">Address</string>
+    <string name="vieweditprofile_address_hint">Enter your address</string>
+    <string name="vieweditprofile_address_hint1">Enter your address</string>
+    <string name="vieweditprofile_city">City</string>
+    <string name="vieweditprofile_city_hint">Enter your city</string>
+    <string name="vieweditprofile_pincode">Pincode</string>
+    <string name="vieweditprofile_pincode_hint">Enter your pincode</string>
+    <string name="vieweditprofile_state_hint">Select your State</string>
     <string name="vieweditprofile_logo_discription">Select your official logo</string>
     <string name="vieweditprofile_submit">Save</string>
+
+    <!-- SrerviceRequest -->
+    <string name="service_create">Create Service</string>
+    <string name="service_create_success">Service created successfully</string>
+    <string name="service_category_name">Product Category</string>
+    <string name="service_subcategory_name">Product Sub-category</string>
+    <string name="service_product_name">Product Name</string>
+    <string name="service_warranty">Warranty Status</string>
+    <string name="problem_desc">Enter description of the problem</string>
+    <string name="service_branch">Service Location</string>
+    <string name="service_desc">Problem Description</string>
+    <string name="category_required">Select category</string>
+    <string name="subcategory_required">Select subcategory</string>
+    <string name="product_required">Select product</string>
+    <string name="warrenty_required">Select warrenty</string>
+    <string name="service_location_required">Select service location</string>
+    <string name="problem_details_required">Enter problem details</string>
+    <string name="service_create_submit">Submit Request</string>
+    <string name="service_no_address">No Address found for the customer</string>
+    <string name="select_address">Select Address</string>
+    <string name="update_status">Update Status</string>
+    <string name="job_sheet">Job Sheet</string>
+    <string name="update_visit_type">Update Visit Type</string>
+    <string name="product_description_warrenty">Edit Product Description/Warranty</string>
+    <string name="customer_approval">Send for Customer Approval</string>
 
     <!-- PreRegistration -->
     <string name="preregistration_heading">If you are an existing user please select existing account otherwise select new account</string>
     <string name="preregistration_existinguser">Log In</string>
     <string name="preregistration_newuser">Sign Up</string>
+    <string name="preregistration_submit">Submit</string>
 
     <!-- Main Activity -->
     <string name="product_name">Product Name</string>
@@ -103,20 +157,33 @@ Adding a 2nd line like this should work.
     <string name="name_2">Name</string>
     <string name="email_2">Email</string>
     <string name="contact_2">Contact</string>
+    <string name="demo_video">Demo video</string>
+    <string name="request_information">Request Information</string>
+    <string name="requestingInformation">Request Information</string>
+    <string name="video_player">Video Player</string>
+    <string name="video_player_title">Video Player</string>
+    <string name="no_internet_access">Please check your network connection</string>
+    <string name="no_internet">Can not Connect</string>
+    <string name="logout_warning">Are you sure you want to logout</string>
 
-    <!-- Registration -->
-    <string name="registration_heading">Create Account</string>
-    <string name="registration_firsttime">Since this is your first time so create your account first</string>
-    <string name="registration_name">Name</string>
-    <string name="registration_name_hint">Name</string>
-    <string name="registration_email">Email</string>
-    <string name="registration_email_hint">Email</string>
-    <string name="registration_setpassword">Password</string>
-    <string name="registration_setpassword_hint">Password</string>
-    <string name="registration_setpasswordconfirm">Confirm Password</string>
-    <string name="registration_setpasswordconfirm_hint">Confirm Password</string>
-    <string name="registration_submit">Next</string>
-    <string name="registration_showpassword">Show Password</string>
+    <!-- Request -->
+    <string name="request_heading">Create Account</string>
+    <string name="request_firsttime">For enquiries, please give details below</string>
+    <string name="request_name">Name</string>
+    <string name="request_position">Position</string>
+    <string name="request_company">Company</string>
+    <string name="request_website">Website</string>
+    <string name="request_email">Email</string>
+    <string name="request_phone">Phone number</string>
+    <string name="request_location">Location</string>
+    <string name="request_Preferences">Preferences:</string>
+    <string name="request_Level_of_interests">Level of interests:</string>
+    <string name="request_purchase">Considering Purchase</string>
+    <string name="request_dealship">Dealership </string>
+    <string name="request_info">Gathering Information</string>
+    <string name="request_Requirements">Requirements</string>
+    <string name="request_reset">Reset</string>
+    <string name="request_submit">Send</string>
 
     <!-- Reset Password -->
     <string name="resetpassword_heading">Reset Password</string>
@@ -130,12 +197,34 @@ Adding a 2nd line like this should work.
     <string name="existinguser_heading">Existing Account</string>
     <string name="existinguser_note">If you are existing user enter your email id and password otherwise go back and click new user</string>
     <string name="existinguser_username">Username</string>
-    <string name="existinguser_username_hint">Enter your username</string>
+    <string name="existinguser_username_hint">Email</string>
     <string name="existinguser_password">Password</string>
-    <string name="existinguser_password_hint">Enter your password</string>
+    <string name="existinguser_password_hint">Password</string>
     <string name="existinguser_showpassword">Show password</string>
     <string name="existinguser_login">Login</string>
     <string name="existinguser_forgetpassword">Forgot password</string>
+    <string name="hide_password">Hide Password</string>
+    <string name="show_password">Show password</string>
+
+    <!-- login  -->
+    <string name="signup_hint">New user sign up here!</string>
+    <string name="signup">SignUp</string>
+    <string name="signup_text">Sign Up</string>
+    <string name="login_correct_name">Enter name</string>
+    <string name="login_correct_email">Enter email</string>
+    <string name="request_account">Request Account</string>
+    <string name="saved_details">Service location details saved successfully</string>
+
+    <!--<string name="registration_name_hint">Name</string>-->
+    <!--<string name="registration_username_hint">User name</string>-->
+    <!--<string name="registration_email_hint">Email</string>-->
+    <!--<string name="registration_phone_hint">Phone number</string>-->
+    <!--<string name="registration_password_hint">Password</string>-->
+    <!--<string name="registration_confirm_password_hint">Confirm Password</string>-->
+    <!--<string name="registration_address_hint">Address</string>-->
+    <!--<string name="registration_city_hint">City</string>-->
+    <!--<string name="registration_pin_code_hint">Pin code</string>-->
+    <!--<string name="registration_showpassword">Show password</string>-->
 
     <!-- Basics -->
     <string name="name">Name</string>
@@ -189,7 +278,66 @@ Adding a 2nd line like this should work.
     <string name="options_clear">Clear</string>
     <string name="options_exit">Exit</string>
 
+    <!-- Change Password -->
+    <string name="change_password_username">Username</string>
+    <string name="change_password_password">Enter current password</string>
+    <string name="change_password_password_error">Enter Password</string>
+    <string name="change_password_new_password_error">Enter new Password</string>
+    <string name="change_password_confirm_new_password_error">Enter confirm Password</string>
+    <string name="change_password_password_length_error">Password should have minimum 6 digits</string>
+    <string name="change_password_new_password_length_error">New Password should have minimum 6 digits</string>
+    <string name="change_password_confirm_new_password_length_error">Confirm new password should have minimum 6 digits</string>
+    <string name="change_password_new">Enter new password</string>
+    <string name="change_password_new_confirm_password">Enter confirm password</string>
+    <string name="change_password_submit">Submit</string>
+
+    <!-- Registration -->
+    <string name="registration_title_hint">Title*</string>
+    <string name="registration_name_hint">Name</string>
+    <string name="registration_business_name_hint">Business Name</string>
+    <string name="registration_Address_line1_hint">Address Line1*</string>
+    <string name="registration_Address_line2_hint">Address Line2</string>
+    <string name="registration_Address_line3_hint">Address Line3</string>
+    <string name="registration_city_hint">City</string>
+    <string name="registration_pin_code_hint">Pin code*</string>
+    <string name="registration_state_hint">state*</string>
+    <string name="registration_phone_hint">Phone*</string>
+    <string name="registration_email_hint">Email*</string>
+    <string name="registration_submit">Request Account</string>
+    <string name="registration_success_message">Your account has been requested successfully</string>
+
+
+    <string name="title_requered">Select title first</string>
+    <string name="address1_required">Enter address line 1</string>
+    <string name="pincode_required">Enter pincode</string>
+    <string name="state_required">Select state</string>
+    <string name="registration_name1">Name</string>
+    <string name="registration_name_error1">Enter Name</string>
+    <string name="registration_email">Email</string>
+    <string name="registration_phone_number">Phone number</string>
+    <string name="registration_phone_number_error">Enter Phone number</string>
+    <string name="registration_phone_number_length_error">Phone number shoud have 10digits</string>
+    <string name="registration_address">Address</string>
+    <string name="registration_city">City</string>
+    <string name="registration_pincode">Pin code</string>
+    <string name="registration_password">Password</string>
+    <string name="registration_confirm_password">Confirm Password</string>
+    <string name="registration_name_error">Enter name</string>
+    <string name="registration_password_error">Enter password</string>
+    <string name="registration_email_error">Enter your email</string>
+    <string name="registration_address_error">Enter your address</string>
+    <string name="registration_pincode_error">Enter your Pin code</string>
+    <string name="registration_password_limit_correct">The password should have minimum 6 characters</string>
+    <string name="registration_confirm_password_limit_correct">The confirm password should have minimum 6 characters</string>
+    <string name="registration_password_not_match">Password does not match</string>
+    <string name="registration_showpassword">Show password</string>
+
     <!-- Validation -->
+    <string name="correct_location">Enter location</string>
+    <string name="correct_requirement">Enter requirement</string>
+    <string name="correct_radio_preferences">Please select one preferences type</string>
+    <string name="correct_radio_interest">Please select one interest type</string>
+
     <string name="dialog_password_title">Enter password</string>
     <string name="dialog_password_message">Password</string>
     <string name="dialog_password_hint">Enter your password</string>
@@ -198,26 +346,21 @@ Adding a 2nd line like this should work.
     <string name="dialog_password_correct">Enter correct password</string>
     <string name="correct_name">Enter your name</string>
     <string name="correct__name">Enter name</string>
+    <string name="contact_name">Enter contact person name</string>
+    <string name="site_name">Enter site name</string>
+    <string name="business_name">Enter business name</string>
+    <string name="contact_mobile">Enter contact mobile number</string>
+    <string name="contact_email">Enter contact email address</string>
+    <string name="contact_address">Enter contact address</string>
+    <string name="contact_city">Enter city</string>
+    <string name="contact_pincode">Enter pincode</string>
+    <string name="contact_state">Select state</string>
     <string name="correct_email">Enter your email</string>
-    <string name="correct_user_name">Enter your username</string>
-    <string name="correct_username_without_space">Enter username without any space</string>
-    <string name="username_minimum_limit">Enter username should have atleast 6 characters</string>
-    <string name="correct_email2">Enter correct email</string>
-    <string name="correct_password">Enter your password</string>
-    <string name="password_correct">Enter correct password</string>
-    <string name="correct_confirm_password">Enter your confirm password</string>
-    <string name="password_new">Enter New password</string>
-    <string name="correct_business_name">Enter business name</string>
-    <string name="correct_business_category">Select business category</string>
-    <string name="correct_contact">Enter contact number</string>
-    <string name="category_not_change">Category can not be changed</string>
-    <string name="correct_web">Enter a valid website address</string>
-    <string name="correct_limit_contact">Enter 10 digit mobile number only</string>
-    <string name="correct_mobile">Enter correct mobile number</string>
-    <string name="correct_icon">Image icon is set</string>
-    <string name="correct_icone_size">Try uploading image of less in size</string>
-    <string name="hide_password">Hide Password</string>
-    <string name="show_password">Show password</string>
+    <string name="correct_email_error">Enter your email</string>
+    <string name="correct_address_error">Enter your address</string>
+    <string name="correct_city_error">Enter your address</string>
+    <string name="correct_phone">Enter correct phone</string>
+    <string name="correct_phone_length">Phone number should have 10digits</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="password_limit_correct">The password should have minimum 6 characters</string>
     <string name="confirm_password_limit_correct">Note confirm password should have minimum 6 characters</string>
@@ -227,10 +370,23 @@ Adding a 2nd line like this should work.
     <string name="password_confirm_space">Enter the conform password without spaces</string>
     <string name="old_new_password">Old and new password should be different</string>
     <string name="password_match">Passwords match</string>
+    <string name="password_correct2">Try again with the correct password</string>
+    <string name="correct_password">Enter your password</string>
+    <string name="password_new">Enter New password</string>
+    <string name="correct_confirm_password">Enter your confirm password</string>
+
+
+    <string name="correct_user_name">Enter your username</string>
+    <string name="correct_username_without_space">Enter username without any space</string>
+    <string name="username_minimum_limit">Enter username should have atleast 6 characters</string>
+    <string name="correct_email2">Enter correct email</string>
+    <string name="correct_contact">Enter contact number</string>
+    <string name="category_not_change">Category can not be changed</string>
+    <string name="correct_limit_contact">Enter 10 digit mobile number only</string>
+    <string name="correct_mobile">Enter correct mobile number</string>
+
     <string name="password_error">Check above data for errors and try again</string>
     <string name="email_password">Enter correct username and password</string>
-    <string name="password_correct2">Try again with the correct password</string>
-    <string name="password_online_local_different">Old password does not match</string>
     <string name="email_error2">Empty Email ID was sent to the server</string>
     <string name="relationship_validation">Select relationship first</string>
     <string name="parent_selection_validation">Select parent first</string>
@@ -257,9 +413,52 @@ Adding a 2nd line like this should work.
     <string name="dialog_password_wrong_button">Forgot Password</string>
     <string name="dialog_password_wrong_button2">Cancel</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_registration">Registration</string>
+    <string name="title_activity_reset__password">Reset Password</string>
     <string name="title_activity_sub_menu">SubMenuActivity</string>
     <string name="title_activity_product__description">Product</string>
     <string name="title_activity_single_view">SingleViewActivity</string>
     <string name="title_activity_product_list">Product_list</string>
+    <string name="title_activity_request_quota">Request Quota</string>
+    <string name="no_internet_splashscreen">Internet not available, connect to internet and try again</string>
 
+    <!--radio_group-->
+    <string name="radio_email">Email</string>
+    <string name="radio_phone">Phone</string>
+    <string name="radio_purchase">Considering Purchase</string>
+    <string name="radio_dealership">Dealership</string>
+    <string name="radio_info">Gathering Information</string>
+    <string name="title_activity_video__players">Video Player</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_no_internet_alert">NoInternetAlert</string>
+    <string name="title_activity_change__password">Change Password</string>
+    <string name="title_activity_service__request">Service Request</string>
+    <string name="title_activity_service__create">Service Create</string>
+    <string name="no_of_equipments_to_service">No of Equipments to be serviced</string>
+    <string name="title_activity_edit_request_visit_date">EditRequestVisitDate</string>
+    <string name="title_activity_update_status">UpdateStatus</string>
+
+
+    <string-array name="spinnerItems">
+        <item>Rejected</item>
+        <item>Approved</item>
+    </string-array>
+    <string-array name="spinnerSelect">
+        <item>Select</item>
+        <item>Select2</item>
+    </string-array>
+    <string-array name="serviceTypes">
+        <item>Warrenty</item>
+        <item>Warrenty</item>
+    </string-array>
+
+    <string name="title_activity_add_service_products">Add Service Products</string>
+    <string name="title_activity_update_visit_detils">Update Visit Detils</string>
+    <string name="title_activity_service_products">Service Products</string>
+    <string name="title_activity_service_alljobs">Service All jobs</string>
+    <string name="title_activity_service_job_details">Service Job Details</string>
+    <string name="title_activity_service_location_details">Service Location Details</string>
+    <string name="title_activity_customer_service_request">Customer Service Request</string>
+    <string name="title_activity_mysample">MysampleActivity</string>
+    <string name="title_activit_service_details">Service Deatils</string>
 </resources>
