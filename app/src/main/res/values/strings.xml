@@ -20,7 +20,7 @@
     <string name="unknownerror7">No response from server</string>
     <string name="unknownerror8">Error contacting server</string>
     <string name="unknownerror9">Error accessing server try reloading the page</string>
-    <string name="unknownerror10">An error occurred while accessing server try again. If problem persists contact charnock for the issue</string>
+    <string name="unknownerror10">An error occurred while accessing server try again. If problem persists contact administrator for the issue</string>
     <string name="error_occured">No Internet Access an error has occurred try again</string>
     <string name="permission_error">You do not have enough permission to send message</string>
     <string name="permission_error_calender">You do not have enough permission to create event</string>
@@ -28,11 +28,12 @@
     <string name="loading">Loading…</string>
     <string name="please_wait">Please wait</string>
     <string name="message">New Message:</string>
-    <string name="sender_id">963510041615</string>
+    <string name="sender_id">356644191298</string>
     <string name="url_reference">http://purplefront.net/charnock_dev/</string>
     <string name="YoutubeDeveloperKey">AIzaSyA0XSrhhUbnJrecvoWyDj2dButtR6Y06A0</string>
     <string name="actionbar_text_color">#ffffff</string>
     <string name="divider_color">#ebebeb</string>
+
 
     <string-array name="planets_array">
         <item>Home</item>
@@ -62,6 +63,7 @@
         <item>Exit</item>
     </string-array>
 
+    <string name="view_profile">View Profile</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
@@ -71,6 +73,7 @@
     <string name="roleerror">You do not have any role defined</string>
     <string name="website2" translatable="false">www.charnock.biz</string>
     <string name="thank_you_message">Thank you for contacting us we will get back to you shortly.</string>
+
 
     <!-- Change Password -->
     <string name="changepassword_heading">Change Password</string>
@@ -90,7 +93,7 @@
 
     <!-- View/Edit Profile -->
     <string name="vieweditprofile_heading">View/Edit Profile</string>
-    <string name="vieweditprofile_name">Name</string>
+    <string name="vieweditprofile_name">Name*</string>
     <string name="vieweditprofile_name_hint">Enter your name</string>
     <string name="vieweditprofile_email">Email</string>
     <string name="vieweditprofile_email_hint">Enter your email address</string>
@@ -104,10 +107,15 @@
     <string name="vieweditprofile_phone_hint">Enter your 10 digit mobile number</string>
     <string name="vieweditprofile_fbpage">FB page</string>
     <string name="vieweditprofile_fbpage_hint">Enter your Facebook page name</string>
-    <string name="vieweditprofile_address">Address</string>
+    <string name="vieweditprofile_address">Address Line 1</string>
+    <string name="vieweditprofile_address2">Address Line 2</string>
+    <string name="vieweditprofile_address3">Address Line 3</string>
     <string name="vieweditprofile_address_hint">Enter your address</string>
-    <string name="vieweditprofile_address_hint1">Enter your address</string>
+    <string name="vieweditprofile_address_hint1">Enter your address line 1</string>
+    <string name="vieweditprofile_address_hint2">Enter your address line 2</string>
+    <string name="vieweditprofile_address_hint3">Enter your address line 3</string>
     <string name="vieweditprofile_city">City</string>
+    <string name="vieweditprofile_state">State</string>
     <string name="vieweditprofile_city_hint">Enter your city</string>
     <string name="vieweditprofile_pincode">Pincode</string>
     <string name="vieweditprofile_pincode_hint">Enter your pincode</string>
@@ -145,6 +153,7 @@
     <string name="preregistration_existinguser">Log In</string>
     <string name="preregistration_newuser">Sign Up</string>
     <string name="preregistration_submit">Submit</string>
+    <string name="update_saved">Changes has saved sucessfully</string>
 
     <!-- Main Activity -->
     <string name="product_name">Product Name</string>
@@ -184,6 +193,8 @@
     <string name="request_Requirements">Requirements</string>
     <string name="request_reset">Reset</string>
     <string name="request_submit">Send</string>
+    <string name="catalog">Catalog</string>
+    <string name="service_request">Service Request</string>
 
     <!-- Reset Password -->
     <string name="resetpassword_heading">Reset Password</string>
@@ -277,6 +288,10 @@
     <string name="options_unregister">Unregister</string>
     <string name="options_clear">Clear</string>
     <string name="options_exit">Exit</string>
+    <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to send downstream messages to this app.</string>
+    <string name="registering_message">Generating InstanceID token...</string>
+    <string name="token_error_message">An error occurred while either fetching the InstanceID token, sending the fetched token to the server or subscribing to the PubSub topic. Please try
+    running the sample again.</string>
 
     <!-- Change Password -->
     <string name="change_password_username">Username</string>
@@ -337,7 +352,7 @@
     <string name="correct_requirement">Enter requirement</string>
     <string name="correct_radio_preferences">Please select one preferences type</string>
     <string name="correct_radio_interest">Please select one interest type</string>
-
+    <string name="update_failed">Update failed due to unknown reason. Contact administrator for the issue.</string>
     <string name="dialog_password_title">Enter password</string>
     <string name="dialog_password_message">Password</string>
     <string name="dialog_password_hint">Enter your password</string>
@@ -374,7 +389,7 @@
     <string name="correct_password">Enter your password</string>
     <string name="password_new">Enter New password</string>
     <string name="correct_confirm_password">Enter your confirm password</string>
-
+    <string name="corrent_password">Passwords do not match</string>
 
     <string name="correct_user_name">Enter your username</string>
     <string name="correct_username_without_space">Enter username without any space</string>
@@ -388,8 +403,6 @@
     <string name="password_error">Check above data for errors and try again</string>
     <string name="email_password">Enter correct username and password</string>
     <string name="email_error2">Empty Email ID was sent to the server</string>
-    <string name="relationship_validation">Select relationship first</string>
-    <string name="parent_selection_validation">Select parent first</string>
     <string name="userid_existing_message">User already exist for this username. Try different username</string>
     <string name="password_reset_error">Some error occurred while resetting your password. Try again</string>
     <string name="email_error">The username you have entered does not match our records. Try again.</string>
@@ -434,7 +447,7 @@
     <string name="title_activity_change__password">Change Password</string>
     <string name="title_activity_service__request">Service Request</string>
     <string name="title_activity_service__create">Service Create</string>
-    <string name="no_of_equipments_to_service">No of Equipments to be serviced</string>
+    <string name="no_of_equipments_to_service">No of Equipments</string>
     <string name="title_activity_edit_request_visit_date">EditRequestVisitDate</string>
     <string name="title_activity_update_status">UpdateStatus</string>
 
@@ -460,5 +473,7 @@
     <string name="title_activity_service_location_details">Service Location Details</string>
     <string name="title_activity_customer_service_request">Customer Service Request</string>
     <string name="title_activity_mysample">MysampleActivity</string>
+    <string name="title_activity_job_sheet">JobSheet</string>
     <string name="title_activit_service_details">Service Deatils</string>
+
 </resources>

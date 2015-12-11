@@ -15,7 +15,8 @@
             style="@style/TextviewStyle_space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/registration_title_hint" />
+            android:text="@string/registration_title_hint"
+            android:textColor="@color/dark_red" />
 
         <Spinner
             android:id="@+id/registation_title"
@@ -28,7 +29,8 @@
             style="@style/TextviewStyle_space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/registration_name_hint" />
+            android:text="@string/registration_name_hint"
+            android:textColor="@color/dark_red" />
 
         <EditText
             android:id="@+id/registration_name"
@@ -44,7 +46,8 @@
             style="@style/TextviewStyle_space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/registration_business_name_hint" />
+            android:text="@string/registration_business_name_hint"
+            android:textColor="@color/dark_red" />
 
         <EditText
             android:id="@+id/registration_business_name"
@@ -60,7 +63,8 @@
             style="@style/TextviewStyle_space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/registration_Address_line1_hint" />
+            android:text="@string/registration_Address_line1_hint"
+            android:textColor="@color/dark_red" />
 
         <EditText
             android:id="@+id/registration_address"
@@ -76,7 +80,8 @@
             style="@style/TextviewStyle_space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/registration_Address_line2_hint" />
+            android:text="@string/registration_Address_line2_hint"
+            android:textColor="@color/dark_red" />
 
         <EditText
             android:id="@+id/registration_address_2"
@@ -92,7 +97,8 @@
             style="@style/TextviewStyle_space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/registration_Address_line3_hint" />
+            android:text="@string/registration_Address_line3_hint"
+            android:textColor="@color/dark_red" />
 
         <EditText
             android:id="@+id/registration_address_3"
@@ -122,7 +128,8 @@
                     style="@style/TextviewStyle_space"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/registration_city_hint" />
+                    android:text="@string/registration_city_hint"
+                    android:textColor="@color/dark_red" />
 
                 <EditText
                     android:id="@+id/registration_city"
@@ -147,7 +154,8 @@
                     style="@style/TextviewStyle_space"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/registration_pin_code_hint" />
+                    android:text="@string/registration_pin_code_hint"
+                    android:textColor="@color/dark_red" />
 
                 <EditText
                     android:id="@+id/registration_pin_code"
@@ -166,14 +174,16 @@
             style="@style/TextviewStyle_space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="State" />
+            android:text="State"
+            android:textColor="@color/dark_red" />
 
 
         <Spinner
             android:id="@+id/registration_state"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:prompt="@string/registration_state_hint" />
+            android:prompt="@string/registration_state_hint"
+            android:spinnerMode="dialog" />
 
 
         <TextView
@@ -181,7 +191,8 @@
             style="@style/TextviewStyle_space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/registration_phone_hint" />
+            android:text="@string/registration_phone_hint"
+            android:textColor="@color/dark_red" />
 
         <EditText
             android:id="@+id/registration_phone"
@@ -197,7 +208,8 @@
             style="@style/TextviewStyle_space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/registration_email_hint" />
+            android:text="@string/registration_email_hint"
+            android:textColor="@color/dark_red" />
 
         <EditText
             android:id="@+id/registration_email"

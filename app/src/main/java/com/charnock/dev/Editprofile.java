@@ -1,34 +1,63 @@
 package com.charnock.dev;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.charnock.dev.controller.AppController;
+import com.charnock.dev.model.Database;
+import com.charnock.dev.model.Profile_Model;
+import com.charnock.dev.model.Response_Model;
+import com.charnock.dev.parsers.Profile_JSONParser;
+import com.charnock.dev.parsers.Response_JSONParser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class Editprofile extends Activity {
 
-    String name = "", email = "", address = "", city = "", pincode = "";
-    String id;
-    EditText nameet, emailet, addresset, cityet, pincodeet;
+    String name = "", phone = "", address = "", address2 = "", address3 = "", city = "", pincode = "";
+    EditText nameet, addresset, addresset2, addresset3, cityet, pincodeet, phoneet;
     Button b;
     ProgressDialog progress;
+    List<Database> database;
+    List<Profile_Model> feedlist;
+    String tag_string_req_category3 = "string_req_warrenty";
+    String state_id = "";
+    ArrayList<String> myarray_state = new ArrayList<>();
+    ArrayList<String> myarray2_state = new ArrayList<>();
+    Spinner spnr_state;
+    List<Response_Model> feedlist_response;
     private String TAG = Editprofile.class.getSimpleName();
     private String tag_string_req_send = "string_req_send";
+    private String tag_string_req = "string_req";
 
     public static void hideKeyboard(Activity activity) {
         if (activity != null && activity.getWindow() != null && activity.getWindow().getDecorView() != null) {
@@ -55,256 +84,319 @@ public class Editprofile extends Activity {
         progress.setIndeterminate(true);
         progress.hide();
 
-        nameet = (EditText) findViewById(R.id.viewedit_name_edit);
-        emailet = (EditText) findViewById(R.id.viewedit_email_edit);
-        addresset = (EditText) findViewById(R.id.viewedit_address_edit);
-        cityet = (EditText) findViewById(R.id.viewedit_city_edit);
-        pincodeet = (EditText) findViewById(R.id.viewedit_pincode_edit);
-
-        b = (Button) findViewById(R.id.viewedit_update);
-
         try {
-            SQLiteDatabase db2 = openOrCreateDatabase("Charnock", MODE_PRIVATE, null);
-            Cursor c = db2.rawQuery("SELECT * FROM business_master", null);
-            c.moveToFirst();
-            id = c.getString(c.getColumnIndex("id"));
-            name = c.getString(c.getColumnIndex("name"));
-            email = c.getString(c.getColumnIndex("email"));
-            address = c.getString(c.getColumnIndex("address"));
-            city = c.getString(c.getColumnIndex("city"));
-            pincode = c.getString(c.getColumnIndex("pincode"));
-
-            db2.close();
+            dbhelp.DatabaseHelper2 entry = new dbhelp.DatabaseHelper2(Editprofile.this);
+            entry.close();
+            database = entry.getdatabase();
         } catch (Exception e) {
-            //           Log.d("Exception : ", "" + e);
-            //          Log.d("exception", "user does not exist");
+            Log.d("Exception : ", "" + e);
+            Log.d("exception", "user does not exist");
         }
 
-        nameet.setText(name);
-        emailet.setText(email);
-        addresset.setText(address);
-        cityet.setText(city);
-        pincodeet.setText(pincode);
+        myarray_state.add("Select");
+        myarray2_state.add("Select");
 
+        Internet_Access ac = new Internet_Access();
+        if (ac.isonline(Editprofile.this)) {
+            get_data(getResources().getString(R.string.url_reference) + "home/view_profile.php");
+        } else {
+            Toast.makeText(Editprofile.this, getResources().getString(R.string.nointernetconnection), Toast.LENGTH_LONG).show();
+        }
+
+        spnr_state = (Spinner) findViewById(R.id.registration_state);
+        ArrayAdapter<String> adapter4_branch = new ArrayAdapter<>(Editprofile.this, android.R.layout.simple_spinner_dropdown_item, myarray_state);
+        adapter4_branch.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnr_state.setAdapter(adapter4_branch);
+        spnr_state.setFocusableInTouchMode(true);
+
+        spnr_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                if (myarray_state.get(position).equals("Select") || myarray_state.get(position).equals("")) {
+                    state_id = "";
+                } else {
+                    state_id = myarray2_state.get(position);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                state_id = "";
+            }
+        });
+
+        nameet = (EditText) findViewById(R.id.viewedit_name_edit);
+        addresset = (EditText) findViewById(R.id.viewedit_address_edit);
+        addresset2 = (EditText) findViewById(R.id.viewedit_address_edit2);
+        addresset3 = (EditText) findViewById(R.id.viewedit_address_edit3);
+        cityet = (EditText) findViewById(R.id.viewedit_city_edit);
+        pincodeet = (EditText) findViewById(R.id.viewedit_city_pincode);
+        phoneet = (EditText) findViewById(R.id.viewedit_phone_edit);
+        b = (Button) findViewById(R.id.viewedit_update);
         b.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-//                AlertDialog.Builder builder = new AlertDialog.Builder(Editprofile.this);
-//                builder.setTitle(R.string.dialog_password_title);
-//                builder.setMessage(R.string.dialog_password_message);
-//                LinearLayout ll=new LinearLayout(Editprofile.this);
-//                ll.setOrientation(LinearLayout.VERTICAL);
-//                final EditText et=new EditText(Editprofile.this);
-//                et.setHint(R.string.dialog_password_hint);
-//                et.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-//                et.setTransformationMethod(new PasswordTransformationMethod());
-//                ll.addView(et);
-//                builder.setView(ll);
-//                builder.setPositiveButton(R.string.dialog_password_button, new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                        String pass = et.getText().toString();
-//                        String word2 ="";
-//                        try {
-//                            MCrypt mcrypt = new MCrypt();
-//                            word2  = new String( mcrypt.decrypt(password) );
-//                        } catch (Exception e) {
-//
-//                            e.printStackTrace();
-//                        }
-//             //           Log.d("pass", pass+pass.length());
-//                        if(pass.equals(word2))
-//                        {
+                hideKeyboard(Editprofile.this);
+
                 name = nameet.getText().toString();
-                email = emailet.getText().toString();
                 address = addresset.getText().toString();
+                address2 = addresset2.getText().toString();
+                address3 = addresset3.getText().toString();
                 city = cityet.getText().toString();
                 pincode = pincodeet.getText().toString();
+                phone = phoneet.getText().toString();
                 validationfunction();
-//                        }
-//                        else
-//                        {
-//                            et.setError(getResources().getString(R.string.dialog_password_correct));
-//                            Toast.makeText(Editprofile.this, R.string.dialog_password_correct, Toast.LENGTH_LONG).show();
-//                        }
-//                    }
-//                });
-//                builder.setNegativeButton(R.string.dialog_password_button2, new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Intent intent = new Intent(Editprofile.this,MainActivity.class);
-//                        intent.putExtra("redirection","Editprofile");
-//                        Editprofile.this.finish();
-//                        startActivity(intent);
-//                        overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
-//                    }
-//                });
-//                AlertDialog alert = builder.create();
-//                alert.show();
 
             }
         });
 
 
         nameet.setVisibility(View.VISIBLE);
-        emailet.setVisibility(View.VISIBLE);
         addresset.setVisibility(View.VISIBLE);
         cityet.setVisibility(View.VISIBLE);
         pincodeet.setVisibility(View.VISIBLE);
         b.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        View v = getCurrentFocus();
-
-        if (v != null &&
-                (ev.getAction() == MotionEvent.ACTION_UP || ev.getAction() == MotionEvent.ACTION_MOVE) &&
-                v instanceof EditText &&
-                !v.getClass().getName().startsWith("android.webkit.")) {
-            int scrcoords[] = new int[2];
-            v.getLocationOnScreen(scrcoords);
-            float x = ev.getRawX() + v.getLeft() - scrcoords[0];
-            float y = ev.getRawY() + v.getTop() - scrcoords[1];
-
-            if (x < v.getLeft() || x > v.getRight() || y < v.getTop() || y > v.getBottom())
-                hideKeyboard(this);
+    private void update_display() {
+        if (feedlist != null) {
+            for (Profile_Model flower : feedlist) {
+                nameet.setText(flower.getName());
+                phoneet.setText(flower.getPhone());
+                addresset.setText(flower.getAddress_line1());
+                addresset2.setText(flower.getAddress_line2());
+                addresset3.setText(flower.getAddress_line3());
+                pincodeet.setText(flower.getPincode());
+                cityet.setText(flower.getCity());
+            }
+        } else {
+            Toast.makeText(Editprofile.this, getResources().getString(R.string.unknownerror7), Toast.LENGTH_LONG).show();
         }
-        return super.dispatchTouchEvent(ev);
+    }
+
+
+    private void get_data(String url) {
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Log.d("response", s);
+                feedlist = Profile_JSONParser.parserFeed(s);
+                get_states();
+                update_display();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", database.get(0).getId());
+                params.put("email", database.get(0).getEmail());
+                params.put("business_id", database.get(0).getBusiness_id());
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(request, tag_string_req);
     }
 
     public void updatedisplay() {
-        progress.show();
-        dbhelp entry = new dbhelp(Editprofile.this);
-        entry.open();
-        entry.updateeuser(id, name, email, address, city, pincode);
-        entry.close();
-        progress.hide();
-        finish();
-        Intent intent = new Intent(Editprofile.this, ViewProfile.class);
-        intent.putExtra("redirection", "Editprofile");
-        startActivity(intent);
-        overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+
+        if (feedlist_response != null) {
+            for (Response_Model flower : feedlist_response) {
+                switch (flower.getSuccess()) {
+                    case "Updated Profile":
+
+                        dbhelp entry = new dbhelp(Editprofile.this);
+                        entry.open();
+                        entry.updateeuser(database.get(0).getId(), name, phone);
+                        entry.close();
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Editprofile.this);
+                        builder.setMessage(getResources().getString(R.string.update_saved))
+                                .setCancelable(false)
+                                .setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        Intent intent = new Intent(Editprofile.this, MainActivity.class);
+                                        intent.putExtra("redirection", "Settings");
+                                        finish();
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                        break;
+                    case "Updated Failed":
+                        Toast.makeText(Editprofile.this, getResources().getString(R.string.update_failed), Toast.LENGTH_LONG).show();
+                        break;
+                    case "Wrong Password":
+                        Toast.makeText(Editprofile.this, getResources().getString(R.string.corrent_password), Toast.LENGTH_LONG).show();
+                        break;
+                    case "Error":
+                        Toast.makeText(Editprofile.this, getResources().getString(R.string.unknownerror10), Toast.LENGTH_LONG).show();
+                        break;
+                    default:
+                        Toast.makeText(Editprofile.this, getResources().getString(R.string.unknownerror10), Toast.LENGTH_LONG).show();
+                        break;
+                }
+            }
+        } else {
+            Toast.makeText(Editprofile.this, getResources().getString(R.string.unknownerror7), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void get_states() {
+        StringRequest request = new StringRequest(Request.Method.POST, getResources().getString(R.string.url_reference) + "home/state_list.php",
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        progress.hide();
+                        myarray_state.clear();
+                        myarray2_state.clear();
+
+                        myarray_state.add("Select");
+                        myarray2_state.add("Select");
+                        try {
+                            JSONArray ar = new JSONArray(response);
+                            for (int i = 0; i < ar.length(); i++) {
+                                JSONObject obj = ar.getJSONObject(i);
+                                String id = obj.getString("id");
+                                myarray2_state.add(id);
+                                String name = obj.getString("name");
+                                myarray_state.add(name);
+                            }
+
+                            ArrayAdapter<String> adapter3_branch = new ArrayAdapter<>(Editprofile.this, android.R.layout.simple_spinner_dropdown_item, myarray_state);
+                            adapter3_branch.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spnr_state.setAdapter(adapter3_branch);
+
+                            try {
+                                if (feedlist != null) {
+                                    spnr_state.setSelection(adapter3_branch.getPosition(feedlist.get(0).getState()));
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } catch (JSONException e) {
+//                            Log.d("response",response);
+//                            Log.d("error in json", "l "+ e);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError arg0) {
+                        progress.hide();
+//                        Log.d("error", "" + arg0.getMessage());
+                        Toast.makeText(Editprofile.this, R.string.nointernetaccess, Toast.LENGTH_LONG).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Editprofile.this);
+                        builder.setCancelable(false)
+                                .setMessage(getResources().getString(R.string.nointernetaccess_messgae))
+                                .setNegativeButton(getResources().getString(R.string.retry), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        get_states();
+                                    }
+                                })
+                                .setPositiveButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent intent = new Intent(Editprofile.this, SplashScreen.class);
+                                        finish();
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                    }
+                });
+        AppController.getInstance().addToRequestQueue(request, tag_string_req_category3);
     }
 
     public void validationfunction() {
+
         if (name.equals("") || name.isEmpty() || name.trim().isEmpty()) {
             nameet.setError(getResources().getString(R.string.correct_name));
             Toast.makeText(Editprofile.this, R.string.correct_name, Toast.LENGTH_LONG).show();
-        } else if (email.equals("") || email.isEmpty() || email.trim().isEmpty()) {
-            emailet.setError(getResources().getString(R.string.correct_email_error));
-            Toast.makeText(Editprofile.this, R.string.correct_email_error, Toast.LENGTH_LONG).show();
+        } else if (phone.length() != 10) {
+            phoneet.setError(getResources().getString(R.string.correct_limit_contact));
+            Toast.makeText(Editprofile.this, R.string.correct_limit_contact, Toast.LENGTH_LONG).show();
         } else if (address.equals("") || address.isEmpty() || address.trim().isEmpty()) {
             addresset.setError(getResources().getString(R.string.correct_address_error));
             Toast.makeText(Editprofile.this, R.string.correct_address_error, Toast.LENGTH_LONG).show();
-        } else if (city.equals("") || city.isEmpty() || city.trim().isEmpty()) {
-            cityet.setError(getResources().getString(R.string.correct_city_error));
-            Toast.makeText(Editprofile.this, R.string.correct_city_error, Toast.LENGTH_LONG).show();
+        } else if (pincode.equals("") || pincode.isEmpty() || pincode.trim().isEmpty()) {
+            pincodeet.setError(getResources().getString(R.string.contact_city));
+            Toast.makeText(Editprofile.this, R.string.contact_city, Toast.LENGTH_LONG).show();
+        } else if (state_id.equals("")) {
+            Toast.makeText(Editprofile.this, getResources().getString(R.string.contact_state), Toast.LENGTH_LONG).show();
         }
-//        else if(phone.length() != 10)
-//        {
-//            phoneet.setError(getResources().getString(R.string.correct_limit_contact));
-//            Toast.makeText(Editprofile.this, R.string.correct_limit_contact, Toast.LENGTH_LONG).show();
-//        }
         else {
-//            if(isValidPhoneNumber(phone))
-//            {
-//                if(isonline())
-//                {
-//                    progress.show();
-//                    StringRequest request = new StringRequest(Request.Method.POST,getResources().getString(R.string.url_reference)+"edit_profile.php",
-//
-//                            new Response.Listener<String>() {
-//
-//                                @Override
-//                                public void onResponse(String arg0) {
-// //                                   Log.d(TAG, arg0);
-// //                                   Log.d("here in sucess","sucess");
-//                                    JSONObject parentObject;
-//                                    try {
-//                                        parentObject = new JSONObject(arg0);
-//                                        //						String id = parentObject.getString("id");
-//                                        String sucess = parentObject.getString("sucess");
-//                                        if(sucess.equals("Profile updated"))
-//                                        {
-//                                            progress.hide();
-//                                            updatedisplay();
-//                                        }
-//                                        else
-//                                        {
-//                                            progress.hide();
-//                                            Toast.makeText(Editprofile.this, R.string.unknownerror5,Toast.LENGTH_LONG).show();
-//                                        }
-//                                    } catch (JSONException e) {
-//
-//  //                                      e.printStackTrace();
-//                                    }
-//                                    catch(Exception e)
-//                                    {
-//  //                                      e.printStackTrace();
-//                                    }
-//
-//
-//                                }
-//                            },
-//
-//
-//                            new Response.ErrorListener() {
-//
-//                                @Override
-//                                public void onErrorResponse(VolleyError arg0) {
-//                                    progress.hide();
-// //                                   VolleyLog.d(TAG, "Error: " + arg0.getMessage());
-//                                    Toast.makeText(Editprofile.this, R.string.nointernetaccess, Toast.LENGTH_LONG).show();
-// //                                   Toast.makeText(Editprofile.this, arg0.getMessage(), Toast.LENGTH_LONG).show();
-//                                    Intent intent = new Intent(Editprofile.this, MainActivity.class);
-//                                    intent.putExtra("redirection","Editprofile");
-//                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                    Editprofile.this.finish();
-//                                    finish();
-//                                    startActivity(intent);
-//                                    overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
-//                                }
-//                            }){
-//
-//                        @Override
-//                        protected Map<String, String> getParams() {
-//                            Map<String, String> params = new HashMap<>();
-//                            params.put("email", email);
-//                            params.put("name", name);
-//                            params.put("bsname", bsname);
-//                            params.put("bscategory", category);
-//                            params.put("phone", phone);
-//                            params.put("fbpage", fbpage);
-//                            return params;
-//                        };
-//                    };
-//
-//
-//                    AppController.getInstance().addToRequestQueue(request, tag_string_req_send);
-//                }
-//                else
-//                {
-//                    Toast.makeText(Editprofile.this,R.string.nointernetconnection,Toast.LENGTH_LONG).show();
-//                }
-//            }
-//            else
-//            {
-//                Toast.makeText(Editprofile.this, R.string.correct_mobile, Toast.LENGTH_LONG).show();
-//            }
-            updatedisplay();
+            Internet_Access ac = new Internet_Access();
+            if (ac.isonline(Editprofile.this)) {
+                progress.show();
+                updata();
+            } else {
+                Toast.makeText(Editprofile.this, getResources().getString(R.string.nointernetconnection), Toast.LENGTH_LONG).show();
+            }
         }
     }
 
-    protected boolean isonline() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netinfo = cm.getActiveNetworkInfo();
-        return netinfo != null && netinfo.isConnectedOrConnecting();
+    private void updata() {
+        StringRequest request = new StringRequest(Request.Method.POST, getResources().getString(R.string.url_reference) + "home/edit_profile.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                progress.hide();
+                Log.d("response", s);
+                feedlist_response = Response_JSONParser.parserFeed(s);
+                updatedisplay();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                progress.hide();
+                Toast.makeText(Editprofile.this, getResources().getString(R.string.no_internet_access), Toast.LENGTH_LONG).show();
+                //Toast.makeText(Editprofile.this,volleyError.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", database.get(0).getId());
+                params.put("email", database.get(0).getEmail());
+                params.put("name", name);
+                params.put("password", database.get(0).getPassword());
+                params.put("phone", phone);
+                params.put("city", city);
+                params.put("address1", address);
+                params.put("address2", address2);
+                params.put("address3", address3);
+                params.put("pincode", pincode);
+                params.put("state", state_id);
+                params.put("business_id", database.get(0).getBusiness_id());
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(request, tag_string_req);
     }
 
 //    public static final boolean isValidPhoneNumber(CharSequence enumber) {
@@ -326,75 +418,6 @@ public class Editprofile extends Activity {
                 return true;
         }
     }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == 1 && resultCode == RESULT_OK && null != data) {
-//            try {
-//                Uri selectedImage = data.getData();
-//                String[] filePathColumn = { MediaStore.Images.Media.DATA };
-//
-//                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-//                cursor.moveToFirst();
-//
-//                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//                picturePathicon = cursor.getString(columnIndex);
-//                cursor.close();
-////                Log.d("lee", "icon");
-//                Bitmap bm = BitmapFactory.decodeFile(picturePathicon);
-//                ByteArrayOutputStream stream=new ByteArrayOutputStream();
-////                bm = Bitmap.createScaledBitmap(bm, 96, 96, true);
-//                float maxImageSize = (float) 300;
-//                float ratio = Math.min(
-//                        (float) maxImageSize / bm.getWidth(),
-//                        (float) maxImageSize / bm.getHeight());
-//                int width = Math.round((float) ratio * bm.getWidth());
-//                int height = Math.round((float) ratio * bm.getHeight());
-//                Log.d("width",""+width);
-//                Log.d("height",""+height);
-//                int testheight = height * 5;
-//                int testheight2 = height * 3;
-//                if(testheight<width) {
-//                    bm = Bitmap.createScaledBitmap(bm, width, height, true);
-//                }
-//                else if(testheight2<width)
-//                {
-//                    maxImageSize = (float) 200;
-//                    ratio = Math.min(
-//                            (float) maxImageSize / bm.getWidth(),
-//                            (float) maxImageSize / bm.getHeight());
-//                    width = Math.round((float) ratio * bm.getWidth());
-//                    height = Math.round((float) ratio * bm.getHeight());
-//                    bm = Bitmap.createScaledBitmap(bm, width, height, true);
-//                }
-//                else
-//                {
-//                    maxImageSize = (float) 100;
-//                    ratio = Math.min(
-//                            (float) maxImageSize / bm.getWidth(),
-//                            (float) maxImageSize / bm.getHeight());
-//                    width = Math.round((float) ratio * bm.getWidth());
-//                    height = Math.round((float) ratio * bm.getHeight());
-//                    bm = Bitmap.createScaledBitmap(bm, width, height, true);
-//                }
-//
-//                bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//                logo = stream.toByteArray();
-//                imgString = Base64.encodeToString(logo, Base64.NO_WRAP);
-//                ig.setImageBitmap(bm);
-//                Toast.makeText(Editprofile.this, R.string.correct_icon, Toast.LENGTH_LONG).show();
-//            }
-//            catch (Exception e) {
-//
-//                e.printStackTrace();
-//                Toast.makeText(Editprofile.this, R.string.correct_icone_size, Toast.LENGTH_LONG).show();
-//            }
-//        }
-//
-//    }
 
     @Override
     public void onBackPressed() {

@@ -77,15 +77,17 @@ public class MainActivity extends FragmentActivity {
 
 
         if (database == null) {
-            drawerItem = new ObjectDrawerItem[2];
-            drawerItem[0] = new ObjectDrawerItem(R.drawable.home, "Catalog");
-            drawerItem[1] = new ObjectDrawerItem(R.drawable.profile, "Service Request");
+            drawerItem = new ObjectDrawerItem[3];
+            drawerItem[0] = new ObjectDrawerItem(R.drawable.home, "Home");
+            drawerItem[1] = new ObjectDrawerItem(R.drawable.home, "Catalog");
+            drawerItem[2] = new ObjectDrawerItem(R.drawable.profile, "Service Request");
         } else {
-            drawerItem = new ObjectDrawerItem[4];
-            drawerItem[0] = new ObjectDrawerItem(R.drawable.home, "Catalog");
-            drawerItem[1] = new ObjectDrawerItem(R.drawable.profile, "Service Request");
-            drawerItem[2] = new ObjectDrawerItem(R.drawable.exit_icon1, "Settings");
-            drawerItem[3] = new ObjectDrawerItem(R.drawable.exit_icon1, "Exit");
+            drawerItem = new ObjectDrawerItem[5];
+            drawerItem[0] = new ObjectDrawerItem(R.drawable.home, "Home");
+            drawerItem[1] = new ObjectDrawerItem(R.drawable.home, "Catalog");
+            drawerItem[2] = new ObjectDrawerItem(R.drawable.profile, "Service Request");
+            drawerItem[3] = new ObjectDrawerItem(R.drawable.exit_icon1, "Settings");
+            drawerItem[4] = new ObjectDrawerItem(R.drawable.exit_icon1, "Exit");
         }
 
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.drawer_list_item, drawerItem);
@@ -130,36 +132,57 @@ public class MainActivity extends FragmentActivity {
                     Log.d("permissin_id", database.get(0).getPermission_id());
                     Log.d("role_id", database.get(0).getRole_id());
 
-                    if (database.get(0).getPermission_id().equals("4") && database.get(0).getRole_id().equals("4")) {
-                        Toast.makeText(MainActivity.this, "This feature is currently in cunstruction", Toast.LENGTH_LONG).show();
-                    } else if (database.get(0).getPermission_id().equals("2") && database.get(0).getRole_id().equals("3")) {
-                        Toast.makeText(MainActivity.this, "This feature is currently in cunstruction", Toast.LENGTH_LONG).show();
-                    } else if (database.get(0).getPermission_id().equals("3") && database.get(0).getRole_id().equals("5")) {
-                        Fragment fragment = new Service_Request_View_service_engineer();
+                    if (database == null) {
+                        Fragment fragment = new Login();
                         Bundle args = new Bundle();
                         fragment.setArguments(args);
-
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
                         transaction.replace(R.id.content_frame, fragment);
                         transaction.addToBackStack(null);
                         transaction.commit();
                     } else {
-                        Fragment fragment = new Service_Request_View();
-                        Bundle args = new Bundle();
-                        fragment.setArguments(args);
+                        if (database.get(0).getPermission_id().equals("4") && database.get(0).getRole_id().equals("4")) {
+                            Toast.makeText(MainActivity.this, "This feature is currently in cunstruction", Toast.LENGTH_LONG).show();
+                        } else if (database.get(0).getPermission_id().equals("2") && database.get(0).getRole_id().equals("3")) {
+                            Toast.makeText(MainActivity.this, "This feature is currently in cunstruction", Toast.LENGTH_LONG).show();
+                        } else if (database.get(0).getPermission_id().equals("3") && database.get(0).getRole_id().equals("5")) {
 
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
-                        transaction.replace(R.id.content_frame, fragment);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
+                            Fragment fragment = new Service_Request_View_service_engineer();
+                            Bundle args = new Bundle();
+                            fragment.setArguments(args);
+
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+                            transaction.replace(R.id.content_frame, fragment);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        } else {
+                            Fragment fragment = new Service_Request_View();
+                            Bundle args = new Bundle();
+                            fragment.setArguments(args);
+
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+                            transaction.replace(R.id.content_frame, fragment);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        }
                     }
-
 
                 } else if (redirection.equals("Login")) {
 
                     Fragment fragment = new Login();
+                    Bundle args = new Bundle();
+                    fragment.setArguments(args);
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+                    transaction.replace(R.id.content_frame, fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                } else if (redirection.equals("Settings")) {
+
+                    Fragment fragment = new Settings();
                     Bundle args = new Bundle();
                     fragment.setArguments(args);
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -205,7 +228,7 @@ public class MainActivity extends FragmentActivity {
 
     private void selectItem(int position) {
 
-        Fragment fragment = new HomeCategory();
+        Fragment fragment = new Front_Page();
         Bundle args = new Bundle();
         fragment.setArguments(args);
 
@@ -270,8 +293,14 @@ public class MainActivity extends FragmentActivity {
 //                mDrawerLayout.closeDrawer(mDrawerList);
 //            }
             switch (planet) {
-                case "Catalog": {
+                case "Home": {
                     selectItem(0);
+                    break;
+                }
+                case "Catalog": {
+                    Intent intent = new Intent(MainActivity.this, HomeCategory.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                     break;
                 }
                 case "Service Request": {
@@ -338,7 +367,15 @@ public class MainActivity extends FragmentActivity {
                         transaction.commit();
 
                     } else {
-                        selectItem(0);
+                        Fragment fragment = new Settings();
+                        Bundle args = new Bundle();
+                        fragment.setArguments(args);
+
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+                        transaction.replace(R.id.content_frame, fragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
                     }
                     break;
                 }

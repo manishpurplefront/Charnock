@@ -2,13 +2,17 @@ package com.charnock.dev;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -27,7 +31,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.charnock.dev.controller.AppController;
 import com.charnock.dev.model.ExistingUser_Model;
+import com.charnock.dev.model.Response_Model;
 import com.charnock.dev.parsers.ExistingUser_JSONParser;
+import com.charnock.dev.parsers.Response_JSONParser;
+import com.charnock.dev.pushnotification.QuickstartPreferences;
+import com.charnock.dev.pushnotification.RegistrationIntentService;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,16 +45,20 @@ import java.util.Map;
 
 public class Login extends Fragment {
 
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static final String TAG = "LoginActivity";
     Button btnSignIn;
     TextView tv_signup;
     EditText editTextUserName;
     EditText editTextPassword;
     String password = "", email = "";
-
     ProgressDialog progress;
     List<ExistingUser_Model> feedslist;
     View rootView;
+    List<Response_Model> response_data;
     private String tag_string_req_recieve2 = "string_req_recieve2";
+    private String tag_string_req_send = "string_req_send";
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,12 +82,39 @@ public class Login extends Fragment {
         editTextPassword = (EditText) rootView.findViewById(R.id.existinguser_password);
         tv_signup = (TextView) rootView.findViewById(R.id.tv_signup);
 
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
 
-            public void onClick(View v) {
+                progress.show();
+                SharedPreferences sharedPreferences =
+                        PreferenceManager.getDefaultSharedPreferences(context);
+                boolean sentToken = sharedPreferences
+                        .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
+
                 email = editTextUserName.getText().toString();
                 password = editTextPassword.getText().toString();
                 validationfunction();
+
+//                if (sentToken) {
+//                    Toast.makeText(getActivity(),getResources().getString(R.string.gcm_send_message),Toast.LENGTH_LONG).show();
+//                } else {
+//                    Toast.makeText(getActivity(),getResources().getString(R.string.token_error_message),Toast.LENGTH_LONG).show();
+//                }
+            }
+        };
+
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                if (checkPlayServices()) {
+                    // Start IntentService to register this application with GCM.
+                    Intent intent = new Intent(getActivity(), RegistrationIntentService.class);
+                    getActivity().startService(intent);
+                    progress.show();
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.common_google_play_services_install_text_phone), Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -91,88 +132,80 @@ public class Login extends Fragment {
     }
 
     public void validationfunction() {
-        boolean invalid = true;
+
+        progress.hide();
         if (email.equals("") || email.isEmpty() || email.trim().isEmpty()) {
-            invalid = false;
             Toast.makeText(getActivity(), R.string.correct_email, Toast.LENGTH_LONG).show();
         } else if (!isEmailValid(email)) {
-            invalid = false;
             Toast.makeText(getActivity(), R.string.correct_email2, Toast.LENGTH_LONG).show();
         } else if (password.equals("") || password.isEmpty() || password.trim().isEmpty()) {
-            invalid = false;
             Toast.makeText(getActivity(), R.string.dialog_password_hint, Toast.LENGTH_LONG).show();
         } else if (password.length() < 6) {
-            invalid = false;
             Toast.makeText(getActivity(), R.string.password_limit_correct, Toast.LENGTH_LONG).show();
         } else if (password.trim().length() < 6) {
-            invalid = false;
             Toast.makeText(getActivity(), R.string.password_limit_correct, Toast.LENGTH_LONG).show();
         } else {
-            if (invalid) {
-                if (password.trim().equals(password)) {
-                    if (email.trim().equals(email)) {
-                        if (isonline()) {
-                            progress.show();
-                            try {
-                                MCrypt mcrypt = new MCrypt();
-                                password = MCrypt.bytesToHex(mcrypt.encrypt(password));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            StringRequest request = new StringRequest(Request.Method.POST, getResources().getString(R.string.url_reference) + "home/login.php",
-                                    new Response.Listener<String>() {
-
-                                        @Override
-                                        public void onResponse(String arg0) {
-                                            Log.d("response", arg0);
-                                            Log.d("here in sucess", "sucess");
-                                            progress.hide();
-                                            feedslist = ExistingUser_JSONParser.parserFeed(arg0);
-                                            updatedisplay();
-                                        }
-                                    },
-
-                                    new Response.ErrorListener() {
-
-                                        @Override
-                                        public void onErrorResponse(VolleyError arg0) {
-                                            progress.hide();
-                                            Toast.makeText(getActivity(), R.string.nointernetaccess, Toast.LENGTH_LONG).show();
-//                                            Toast.makeText(Login.this, arg0.getMessage(), Toast.LENGTH_LONG).show();
-                                            Intent intent = new Intent(getActivity(), SplashScreen.class);
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            getActivity().finish();
-                                            startActivity(intent);
-                                            getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-                                        }
-                                    }) {
-
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<>();
-                                    params.put("email", email);
-                                    Log.d("email1", email);
-                                    params.put("password", password);
-                                    Log.d("password1", password);
-
-                                    return params;
-                                }
-
-                            };
-                            AppController.getInstance().addToRequestQueue(request, tag_string_req_recieve2);
-                        } else {
-                            Toast.makeText(getActivity(), R.string.nointernetconnection, Toast.LENGTH_LONG).show();
+            if (password.trim().equals(password)) {
+                if (email.trim().equals(email)) {
+                    Internet_Access ac = new Internet_Access();
+                    if (ac.isonline(getActivity())) {
+                        progress.show();
+                        try {
+                            MCrypt mcrypt = new MCrypt();
+                            password = MCrypt.bytesToHex(mcrypt.encrypt(password));
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
+                        StringRequest request = new StringRequest(Request.Method.POST, getResources().getString(R.string.url_reference) + "home/login.php",
+                                new Response.Listener<String>() {
 
+                                    @Override
+                                    public void onResponse(String arg0) {
+                                        Log.d("response", arg0);
+                                        Log.d("here in sucess", "sucess");
+                                        progress.hide();
+                                        feedslist = ExistingUser_JSONParser.parserFeed(arg0);
+                                        updatedisplay();
+                                    }
+                                },
+
+                                new Response.ErrorListener() {
+
+                                    @Override
+                                    public void onErrorResponse(VolleyError arg0) {
+                                        progress.hide();
+                                        Toast.makeText(getActivity(), R.string.nointernetaccess, Toast.LENGTH_LONG).show();
+//                                            Toast.makeText(Login.this, arg0.getMessage(), Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(getActivity(), SplashScreen.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        getActivity().finish();
+                                        startActivity(intent);
+                                        getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                                    }
+                                }) {
+
+                            @Override
+                            protected Map<String, String> getParams() {
+                                Map<String, String> params = new HashMap<>();
+                                params.put("email", email);
+                                Log.d("email1", email);
+                                params.put("password", password);
+                                Log.d("password1", password);
+
+                                return params;
+                            }
+
+                        };
+                        AppController.getInstance().addToRequestQueue(request, tag_string_req_recieve2);
                     } else {
-                        Toast.makeText(getActivity(), R.string.correct_email2, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), R.string.nointernetconnection, Toast.LENGTH_LONG).show();
                     }
-                } else {
-                    Toast.makeText(getActivity(), R.string.password_space, Toast.LENGTH_LONG).show();
-                }
 
+                } else {
+                    Toast.makeText(getActivity(), R.string.correct_email2, Toast.LENGTH_LONG).show();
+                }
             } else {
-                Toast.makeText(getActivity(), R.string.password_error, Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), R.string.password_space, Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -246,24 +279,7 @@ public class Login extends Fragment {
                             Log.d("business_id", flower.getBusiness_id());
                             Log.d("permission_id", flower.getPermission_id());
                             entry.close();
-                        }
-
-                        if (flower.getPermission_id().equals("4") && flower.getRole_id().equals("4")) {
-                            Toast.makeText(getActivity(), "This feature is currently in construction", Toast.LENGTH_LONG).show();
-                        } else if (flower.getPermission_id().equals("2") && flower.getRole_id().equals("3")) {
-                            Toast.makeText(getActivity(), "This feature is currently in construction", Toast.LENGTH_LONG).show();
-                        } else if (flower.getPermission_id().equals("3") && flower.getRole_id().equals("5")) {
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
-                            intent.putExtra("redirection", "Service Create");
-                            getActivity().finish();
-                            startActivity(intent);
-                            getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-                        } else {
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
-                            intent.putExtra("redirection", "Service Create");
-                            getActivity().finish();
-                            startActivity(intent);
-                            getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                            send_data();
                         }
                         break;
                 }
@@ -292,10 +308,106 @@ public class Login extends Fragment {
         }
     }
 
-    protected boolean isonline() {
-        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netinfo = cm.getActiveNetworkInfo();
-        return netinfo != null && netinfo.isConnectedOrConnecting();
+    @Override
+    public void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
+
     }
 
+    @Override
+    public void onPause() {
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+
+    }
+
+    protected void send_data() {
+
+        final String android_id = Settings.Secure.getString(getContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+
+        Log.d("id", feedslist.get(0).getId());
+        Log.d("email", feedslist.get(0).getEmail());
+        Log.d("token", StaticVariables.token);
+        Log.d("android_id", android_id);
+
+        String url = getResources().getString(R.string.url_reference) + "messaging/register.php";
+        Log.d("url", url);
+        StringRequest request23 = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String s) {
+
+                        Log.d("response", s);
+                        response_data = Response_JSONParser.parserFeed(s);
+                        if (response_data != null) {
+                            for (Response_Model flower : response_data) {
+                                if (flower.getId().equals("Error")) {
+                                    Toast.makeText(getActivity(), getResources().getString(R.string.unknownerror8), Toast.LENGTH_LONG).show();
+                                } else if (flower.getId().equals("Success")) {
+                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    intent.putExtra("redirection", "Service Create");
+                                    getActivity().finish();
+                                    startActivity(intent);
+                                    getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                                } else if (flower.getId().equals("Failure")) {
+                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    intent.putExtra("redirection", "Service Create");
+                                    getActivity().finish();
+                                    startActivity(intent);
+                                    getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                                    Toast.makeText(getActivity(), getResources().getString(R.string.unknownerror2), Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getActivity(), getResources().getString(R.string.unknownerror10), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), getResources().getString(R.string.unknownerror7), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(getActivity(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", feedslist.get(0).getId());
+                params.put("email", feedslist.get(0).getEmail());
+                params.put("token", StaticVariables.token);
+                params.put("android_id", android_id);
+                return params;
+            }
+
+        };
+        AppController.getInstance().addToRequestQueue(request23, tag_string_req_send);
+    }
+
+
+    /**
+     * Check the device to make sure it has the Google Play Services APK. If
+     * it doesn't, display a dialog that allows users to download the APK from
+     * the Google Play Store or enable it in the device's system settings.
+     */
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(getActivity());
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(getActivity(), resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.i(TAG, "This device is not supported.");
+                getActivity().finish();
+            }
+            return false;
+        }
+        return true;
+    }
 }

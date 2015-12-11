@@ -27,11 +27,6 @@
             android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-
-        <!-- <View
-             android:id="@+id/View1"
-             style="@style/Divider2" />-->
-
         <TextView
             android:id="@+id/viewedit_email_head"
             style="@style/TextviewStyle_space"
@@ -86,6 +81,38 @@
             style="@style/TextviewStyle_space"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/city"
+            android:text="@string/vieweditprofile_address2"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/viewedit_address2"
+            style="@style/SimpleTextviewStyle_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            style="@style/TextviewStyle_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/city"
+            android:text="@string/vieweditprofile_address3"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/viewedit_address3"
+            style="@style/SimpleTextviewStyle_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            style="@style/TextviewStyle_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:drawableLeft="@drawable/address"
             android:text="@string/vieweditprofile_city"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -98,10 +125,21 @@
             android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <View
-            android:id="@+id/View6"
-            style="@style/Divider2"
-            android:visibility="gone" />
+        <TextView
+            style="@style/TextviewStyle_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/address"
+            android:text="@string/vieweditprofile_state"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/viewedit_state"
+            style="@style/SimpleTextviewStyle_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>
 

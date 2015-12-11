@@ -16,7 +16,7 @@
             <!-- SHADOW LAYER -->
             <item android:right="4dp" android:top="4dp">
                 <shape>
-                    <solid android:color="#66000000" />
+                    <solid android:color="#40000000" />
                     <corners android:radius="3dip"/>
                 </shape>
             </item>

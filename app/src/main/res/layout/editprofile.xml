@@ -12,24 +12,12 @@
 
         <TextView
             android:id="@+id/textView1"
-            style="@style/Heading"
+            style="@style/TextviewStyle_space"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/apptheme_edit_text_holo_light"
-            android:text="@string/vieweditprofile_heading"
+            android:text="@string/vieweditprofile_name"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:visibility="gone" />
-
-        <!--<TextView-->
-        <!--android:id="@+id/textView2"-->
-        <!--style="@style/TextviewStyle_space"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/vieweditprofile_name"-->
-        <!--android:visibility="gone"-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+            android:textColor="@color/dark_red" />
 
 
         <EditText
@@ -45,24 +33,32 @@
             <requestFocus />
         </EditText>
 
-        <!--<TextView-->
-        <!--android:id="@+id/textView6"-->
-        <!--style="@style/TextviewStyle_space"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/vieweditprofile_bsname"-->
-        <!--android:visibility="gone"-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/TextviewStyle_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_phone_hint"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/dark_red" />
 
         <EditText
-            android:id="@+id/viewedit_email_edit"
+            android:id="@+id/viewedit_phone_edit"
             style="@style/EditTextviewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/apptheme_edit_text_holo_light"
             android:ems="10"
-            android:hint="@string/vieweditprofile_email_hint1"
-            android:inputType="textEmailAddress|textCapWords|textNoSuggestions" />
+            android:hint="@string/vieweditprofile_pincode_hint"
+            android:inputType="text|textNoSuggestions" />
+
+        <TextView
+            style="@style/TextviewStyle_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_Address_line1_hint"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/dark_red" />
 
         <EditText
             android:id="@+id/viewedit_address_edit"
@@ -74,46 +70,98 @@
             android:hint="@string/vieweditprofile_address_hint1"
             android:inputType="textMultiLine|textNoSuggestions" />
 
+        <TextView
+            style="@style/TextviewStyle_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_Address_line2_hint"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/dark_red" />
+
         <EditText
-            android:id="@+id/viewedit_city_edit"
+            android:id="@+id/viewedit_address_edit2"
             style="@style/EditTextviewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/apptheme_edit_text_holo_light"
             android:ems="10"
-            android:hint="@string/vieweditprofile_city_hint"
-            android:inputType="text|textNoSuggestions" />
+            android:hint="@string/vieweditprofile_address_hint2"
+            android:inputType="textMultiLine|textNoSuggestions" />
+
+        <TextView
+            style="@style/TextviewStyle_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_Address_line3_hint"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/dark_red" />
 
         <EditText
-            android:id="@+id/viewedit_pincode_edit"
+            android:id="@+id/viewedit_address_edit3"
             style="@style/EditTextviewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/apptheme_edit_text_holo_light"
             android:ems="10"
-            android:hint="@string/vieweditprofile_pincode_hint"
-            android:inputType="text|textNoSuggestions" />
+            android:hint="@string/vieweditprofile_address_hint3"
+            android:inputType="textMultiLine|textNoSuggestions" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <!--<TextView-->
-        <!--android:id="@+id/textView10"-->
-        <!--style="@style/TextviewStyle_space"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/vieweditprofile_phone"-->
-        <!--android:visibility="gone"-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-        <!--<TextView-->
-        <!--android:id="@+id/textView12"-->
-        <!--style="@style/TextviewStyle"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="5dp"-->
-        <!--android:text="@string/vieweditprofile_fbpage"-->
-        <!--android:visibility="gone"-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+                <TextView
+                    style="@style/TextviewStyle_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/registration_city_hint"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/dark_red" />
 
+                <EditText
+                    android:id="@+id/viewedit_city_edit"
+                    style="@style/EditTextviewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/apptheme_edit_text_holo_light"
+                    android:ems="10"
+                    android:hint="@string/vieweditprofile_city_hint"
+                    android:inputType="text|textNoSuggestions" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextviewStyle_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/registration_pin_code_hint"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/dark_red" />
+
+                <EditText
+                    android:id="@+id/viewedit_city_pincode"
+                    style="@style/EditTextviewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/apptheme_edit_text_holo_light"
+                    android:ems="10"
+                    android:hint="@string/vieweditprofile_pincode_hint"
+                    android:inputType="text|textNoSuggestions" />
+            </LinearLayout>
+        </LinearLayout>
 
         <EditText
             android:id="@+id/viewedit_fbpage_edit"
@@ -124,14 +172,20 @@
             android:visibility="gone" />
 
 
-        <!--<TextView-->
-        <!--android:id="@+id/textView14"-->
-        <!--style="@style/TextviewStyle_space"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/vieweditprofile_website"-->
-        <!--android:visibility="gone"-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+        <TextView
+            style="@style/TextviewStyle_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_state_hint"
+            android:textColor="@color/dark_red" />
+
+
+        <Spinner
+            android:id="@+id/registration_state"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/registration_state_hint"
+            android:spinnerMode="dialog" />
 
         <Button
             android:id="@+id/viewedit_update"

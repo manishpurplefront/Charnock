@@ -1,22 +1,15 @@
 package com.charnock.dev;
 
-import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,9 +23,8 @@ import com.charnock.dev.parsers.MainPage_JSONParser;
 
 import java.util.List;
 
-public class HomeCategory extends Fragment
+public class HomeCategory extends Activity
 {
-    View rootView;
     List<Home_Model> feedlist;
     String tag_string_req = "string_req";
     ProgressDialog progress;
@@ -46,11 +38,11 @@ public class HomeCategory extends Fragment
     RecyclerView.Adapter mAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.home_category, container, false);
-        setHasOptionsMenu(true);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.home_category);
 
-        progress = new ProgressDialog(getActivity());
+        progress = new ProgressDialog(HomeCategory.this);
         progress.setCancelable(false);
         progress.setMessage(getResources().getString(R.string.loading));
         progress.setTitle(R.string.please_wait);
@@ -58,38 +50,33 @@ public class HomeCategory extends Fragment
         progress.setIndeterminate(true);
         progress.hide();
 
-        try {
-            getActivity().getActionBar().removeAllTabs();
-            getActivity().invalidateOptionsMenu();
-            getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-            getActivity().setTitle((Html.fromHtml("<font color=\"" + getResources().getString(R.string.actionbar_text_color) + "\">" + getString(R.string.app_name_home) + "</font>")));
-        } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
-        }
+        getActionBar().setTitle((Html.fromHtml("<font color=\"" + getResources().getString(R.string.actionbar_text_color) + "\">" + "Charnock" + "</font>")));
+        getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setSubtitle("Category");
+        getActionBar().setIcon(R.drawable.pf);
 
         // Calling the RecyclerView
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         // The number of Columns
-        mLayoutManager = new GridLayoutManager(getActivity(), 1);
+        mLayoutManager = new GridLayoutManager(HomeCategory.this, 1);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         try {
-            dbhelp.DatabaseHelper2 db = new dbhelp.DatabaseHelper2(getActivity());
+            dbhelp.DatabaseHelper2 db = new dbhelp.DatabaseHelper2(HomeCategory.this);
             database = db.getdatabase();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-            if (isonline()) {
-                progress.show();
-                getdata(getResources().getString(R.string.url_reference) + "home/home_data.php");
-            } else {
-                Toast.makeText(getActivity(), getResources().getString(R.string.nointernetconnection), Toast.LENGTH_LONG).show();
-            }
-
-        return rootView;
+        Internet_Access ac = new Internet_Access();
+        if (ac.isonline(HomeCategory.this)) {
+            progress.show();
+            getdata(getResources().getString(R.string.url_reference) + "home/home_data.php");
+        } else {
+            Toast.makeText(HomeCategory.this, getResources().getString(R.string.nointernetconnection), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void display_data()
@@ -97,7 +84,7 @@ public class HomeCategory extends Fragment
         progress.show();
         if (feedlist != null) {
 
-            mAdapter = new GridAdapter(feedlist, getActivity());
+            mAdapter = new GridAdapter(feedlist, HomeCategory.this);
             mRecyclerView.setAdapter(mAdapter);
         }
         progress.hide();
@@ -116,16 +103,34 @@ public class HomeCategory extends Fragment
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 progress.hide();
-                Toast.makeText(getActivity(),volleyError.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(HomeCategory.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
         AppController.getInstance().addToRequestQueue(request, tag_string_req);
     }
 
-    protected boolean isonline()
-    {
-        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netinfo = cm.getActiveNetworkInfo();
-        return netinfo != null && netinfo.isConnectedOrConnecting();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+//                SubCategory.this.finish();
+//                SubCategory.this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+                Intent intent = new Intent(HomeCategory.this, MainActivity.class);
+                HomeCategory.this.finish();
+                startActivity(intent);
+                overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+                return true;
+            default:
+                return true;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(HomeCategory.this, MainActivity.class);
+        HomeCategory.this.finish();
+        startActivity(intent);
+        overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 }

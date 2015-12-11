@@ -53,11 +53,10 @@ public class dbhelp {
         ourdb.delete(DATABASE_TABLE, null, null);
     }
 
-    public void updateeuser(String id, String name, String email, String address, String city, String pincode) {
+    public void updateeuser(String id, String name, String phone) {
         ContentValues cv4 = new ContentValues();
         cv4.put(KEY_NAME, name);
-        cv4.put(KEY_EMAIL, email);
-        cv4.put(KEY_BUSINESS_ID, pincode);
+        cv4.put(KEY_PHONE, phone);
         ourdb.update(DATABASE_TABLE, cv4, KEY_ID + "=" + id, null);
     }
 
